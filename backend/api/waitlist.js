@@ -63,6 +63,52 @@ export default {
 				);
 			}
 
+			// Validate Turnstile token
+			const turnstileToken = body['cf-turnstile-response'];
+			if (!turnstileToken) {
+				return new Response(
+					JSON.stringify({
+						success: false,
+						error: "Security verification required",
+					}),
+					{
+						status: 400,
+						headers: { ...corsHeaders, "Content-Type": "application/json" },
+					},
+				);
+			}
+
+			// Verify Turnstile token with Cloudflare
+			const turnstileResponse = await fetch(
+				"https://challenges.cloudflare.com/turnstile/v0/siteverify",
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/x-www-form-urlencoded",
+					},
+					body: new URLSearchParams({
+						secret: env.TURNSTILE_SECRET,
+						response: turnstileToken,
+					}),
+				},
+			);
+
+			const turnstileResult = await turnstileResponse.json();
+
+			if (!turnstileResult.success) {
+				console.error('Turnstile validation failed:', turnstileResult);
+				return new Response(
+					JSON.stringify({
+						success: false,
+						error: "Security verification failed. Please refresh and try again.",
+					}),
+					{
+						status: 400,
+						headers: { ...corsHeaders, "Content-Type": "application/json" },
+					},
+				);
+			}
+
 			const email = body.email.trim().toLowerCase();
 
 			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
