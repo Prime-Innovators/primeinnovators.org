@@ -1,0 +1,22 @@
+name = "primeinnovators-api"
+main = "backend/api/waitlist.js"
+compatibility_date = "2024-11-29"
+
+# Add route configuration
+routes = [
+  { pattern = "api.primeinnovators.org", custom_domain = true }
+]
+
+# D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "primeinnovators-waitlist"
+database_id = "263bc680-1ccb-4492-a768-73e811bc8154"
+
+# Logging
+[observability]
+[observability.logs]
+enabled = false
+head_sampling_rate = 1
+invocation_logs = true
+persist = true
