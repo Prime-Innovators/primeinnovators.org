@@ -13,10 +13,6 @@ binding = "DB"
 database_name = "primeinnovators-waitlist"
 database_id = "263bc680-1ccb-4492-a768-73e811bc8154"
 
-# Turnstile secret for spam protection
-[vars]
-TURNSTILE_SECRET = { secret = "TURNSTILE_SECRET" }
-
 # Logging
 [observability]
 enabled = false
