@@ -65,7 +65,7 @@ export default {
 
 			const email = body.email.trim().toLowerCase();
 
-			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 			if (!emailRegex.test(email)) {
 				return new Response(
 					JSON.stringify({
