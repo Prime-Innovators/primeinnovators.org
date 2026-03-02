@@ -112,7 +112,7 @@
         e.preventDefault();
 
         // Client-side validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
         if (!emailRegex.test(email)) {
           setStatus('error');
           setMessage('Please enter a valid email address');
