@@ -50,7 +50,7 @@ export default {
 		try {
 			const body = await request.json().catch(() => null);
 
-			if (!body || !body.email) {
+			if (!body?.email) {
 				return new Response(
 					JSON.stringify({
 						success: false,
