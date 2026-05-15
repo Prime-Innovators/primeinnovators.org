@@ -4,6 +4,7 @@ import GlassCard from "../components/ui/GlassCard";
 import SectionHeader from "../components/ui/SectionHeader";
 import { milestones, problems, team, values } from "../constants/ecosystem";
 import { RoleIcon } from "../constants/icons";
+import { Link } from "react-router-dom";
 
 function ProblemCards() {
 	return (
