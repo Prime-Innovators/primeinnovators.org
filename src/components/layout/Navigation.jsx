@@ -43,6 +43,8 @@ export default function Navigation() {
 						src="/favicon-32x32.png"
 						alt="Prime Innovators"
 						className="w-8 h-8 rounded-sm transition-transform duration-300 group-hover:scale-110"
+						width={32}
+						height={32}
 					/>
 					<span className="text-headline-sm font-bold text-on-surface hidden sm:block">
 						Prime Innovators

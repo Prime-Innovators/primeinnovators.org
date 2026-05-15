@@ -1,10 +1,16 @@
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import WaitlistForm from "../components/forms/WaitlistForm";
 import EcosystemRolesSection from "../components/sections/EcosystemRolesSection";
+import {
+	OrganizationSchema,
+	WebSiteSchema,
+} from "../components/seo/JsonLd";
 import GlassCard from "../components/ui/GlassCard";
 import SectionHeader from "../components/ui/SectionHeader";
 import { milestones, problems, team, values } from "../constants/ecosystem";
 import { RoleIcon } from "../constants/icons";
-import { Link } from "react-router-dom";
+import { getPageSeo } from "../constants/seo";
 
 function ProblemCards() {
 	return (
@@ -172,13 +178,14 @@ function TeamSection() {
 											src={member.image}
 											alt={member.name}
 											className="w-full h-full object-cover"
+											loading="lazy"
+											width={64}
+											height={64}
 										/>
 									) : (
 										<svg
-											title="Default Avatar"
 											role="img"
-											aria-label="Default avatar"
-											alt="Default Avatar"
+											aria-label={`${member.name} avatar`}
 											className="w-8 h-8 text-primary-fixed"
 											fill="currentColor"
 											viewBox="0 0 24 24"
@@ -205,10 +212,8 @@ function TeamSection() {
 									className="mt-4 inline-flex items-center justify-center gap-2 text-xs font-semibold text-primary-fixed hover:text-primary-fixed/80 transition-colors"
 								>
 									<svg
-										title="LinkedIn Logo"
 										role="img"
-										aria-label="LinkedIn logo"
-										alt="LinkedIn Logo"
+										aria-label="LinkedIn"
 										className="w-4 h-4"
 										fill="currentColor"
 										viewBox="0 0 24 24"
@@ -304,8 +309,30 @@ function AboutHero() {
 }
 
 export default function AboutPage() {
+	const meta = getPageSeo("/about");
+
 	return (
 		<>
+			<Helmet>
+				<title>{meta.title}</title>
+				<meta name="description" content={meta.description} />
+				<link rel="canonical" href={meta.canonical} />
+
+				<meta property="og:title" content={meta.ogTitle} />
+				<meta property="og:description" content={meta.ogDescription} />
+				<meta property="og:type" content={meta.ogType} />
+				<meta property="og:url" content={meta.canonical} />
+				<meta property="og:image" content={meta.ogImage} />
+
+				<meta name="twitter:card" content={meta.twitterCard} />
+				<meta name="twitter:title" content={meta.ogTitle} />
+				<meta name="twitter:description" content={meta.ogDescription} />
+				<meta name="twitter:image" content={meta.ogImage} />
+			</Helmet>
+
+			<OrganizationSchema />
+			<WebSiteSchema />
+
 			<AboutHero />
 			<ProblemCards />
 			<EcosystemRolesSection />
