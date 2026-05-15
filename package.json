@@ -17,7 +17,7 @@
 		"dev": "vite",
 		"build": "vite-react-ssg build",
 		"preview": "vite preview",
-		"deploy": "wrangler deploy",
+		"deploy": "npm run build && npx wrangler pages deploy dist --project-name primeinnovators",
 		"tail": "wrangler tail"
 	},
 	"dependencies": {
