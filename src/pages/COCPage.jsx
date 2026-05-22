@@ -1,8 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import {
-	OrganizationSchema,
-	WebSiteSchema,
-} from "../components/seo/JsonLd";
+import { OrganizationSchema, WebSiteSchema } from "../components/seo/JsonLd";
 import LegalPage from "../components/ui/LegalPage";
 import LegalSection from "../components/ui/LegalSection";
 import { getPageSeo } from "../constants/seo";
@@ -38,12 +35,13 @@ export default function COCPage() {
 			>
 				<LegalSection title="Our Pledge">
 					<p>
-						We as members, contributors, and leaders pledge to make participation
-						in our community a harassment-free experience for everyone, regardless
-						of age, body size, visible or invisible disability, ethnicity, sex
-						characteristics, gender identity and expression, level of experience,
-						education, socio-economic status, nationality, personal appearance,
-						race, religion, or sexual identity and orientation.
+						We as members, contributors, and leaders pledge to make
+						participation in our community a harassment-free experience for
+						everyone, regardless of age, body size, visible or invisible
+						disability, ethnicity, sex characteristics, gender identity and
+						expression, level of experience, education, socio-economic status,
+						nationality, personal appearance, race, religion, or sexual identity
+						and orientation.
 					</p>
 					<p>
 						We pledge to act and interact in ways that contribute to an open,
@@ -59,7 +57,8 @@ export default function COCPage() {
 					<ul className="list-disc list-inside space-y-2">
 						<li>Demonstrating empathy and kindness toward other people</li>
 						<li>
-							Being respectful of differing opinions, viewpoints, and experiences
+							Being respectful of differing opinions, viewpoints, and
+							experiences
 						</li>
 						<li>Giving and gracefully accepting constructive feedback</li>
 						<li>
@@ -67,8 +66,8 @@ export default function COCPage() {
 							affected by our actions, and learning from the experience
 						</li>
 						<li>
-							Focusing on what is best not just for us as individuals, but for the
-							overall community
+							Focusing on what is best not just for us as individuals, but for
+							the overall community
 						</li>
 					</ul>
 					<p>Examples of unacceptable behavior include:</p>
@@ -83,12 +82,12 @@ export default function COCPage() {
 						</li>
 						<li>Public or private harassment</li>
 						<li>
-							Publishing others' private information, such as a physical or email
-							address, without their explicit permission
+							Publishing others' private information, such as a physical or
+							email address, without their explicit permission
 						</li>
 						<li>
-							Other conduct which could reasonably be considered inappropriate in
-							a professional setting
+							Other conduct which could reasonably be considered inappropriate
+							in a professional setting
 						</li>
 					</ul>
 				</LegalSection>
@@ -111,11 +110,11 @@ export default function COCPage() {
 				<LegalSection title="Scope">
 					<p>
 						This Code of Conduct applies within all community spaces, and also
-						applies when an individual is officially representing the community in
-						public spaces. Examples of representing our community include using an
-						official e-mail address, posting via an official social media account,
-						or acting as an appointed representative at an online or offline
-						event.
+						applies when an individual is officially representing the community
+						in public spaces. Examples of representing our community include
+						using an official e-mail address, posting via an official social
+						media account, or acting as an appointed representative at an online
+						or offline event.
 					</p>
 				</LegalSection>
 

@@ -1,8 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import {
-	OrganizationSchema,
-	WebSiteSchema,
-} from "../components/seo/JsonLd";
+import { OrganizationSchema, WebSiteSchema } from "../components/seo/JsonLd";
 import LegalPage from "../components/ui/LegalPage";
 import LegalSection from "../components/ui/LegalSection";
 import { getPageSeo } from "../constants/seo";
@@ -41,8 +38,8 @@ export default function PrivacyPage() {
 					<ul className="list-disc list-inside space-y-2">
 						<li>
 							<strong>Account Data:</strong> GitHub username, profile picture,
-							email address (including .edu verification), university affiliation,
-							and preferred name.
+							email address (including .edu verification), university
+							affiliation, and preferred name.
 						</li>
 						<li>
 							<strong>Usage Data:</strong> Contributions to projects, projects
@@ -51,8 +48,8 @@ export default function PrivacyPage() {
 						</li>
 						<li>
 							<strong>Payment Data:</strong> For sponsored stipends, we collect
-							payment information processed through JazzCash, Easypaisa, or Stripe
-							(we do not store full payment details).
+							payment information processed through JazzCash, Easypaisa, or
+							Stripe (we do not store full payment details).
 						</li>
 						<li>
 							<strong>Communications:</strong> Messages sent through our contact
@@ -71,7 +68,9 @@ export default function PrivacyPage() {
 							Verify your identity and enrollment status (for student-specific
 							features).
 						</li>
-						<li>Calculate Impact Scores and match you with suitable projects.</li>
+						<li>
+							Calculate Impact Scores and match you with suitable projects.
+						</li>
 						<li>Distribute stipends and manage sponsorship funds.</li>
 						<li>
 							Send you updates about the platform, projects, and opportunities
@@ -92,42 +91,43 @@ export default function PrivacyPage() {
 					</p>
 					<ul className="list-disc list-inside space-y-2">
 						<li>
-							<strong>With Your Consent:</strong> To share your profile (including
-							Impact Score and project history) with sponsors and recruiters who
-							have agreed to our terms.
+							<strong>With Your Consent:</strong> To share your profile
+							(including Impact Score and project history) with sponsors and
+							recruiters who have agreed to our terms.
 						</li>
 						<li>
 							<strong>Service Providers:</strong> Third parties that help us
-							operate (e.g., GitHub for authentication, JazzCash/Easypaisa/Stripe
-							for payments, email providers). These processors are bound by
-							confidentiality agreements.
+							operate (e.g., GitHub for authentication,
+							JazzCash/Easypaisa/Stripe for payments, email providers). These
+							processors are bound by confidentiality agreements.
 						</li>
 						<li>
-							<strong>Legal Requirements:</strong> To comply with laws, respond to
-							valid legal requests, or protect rights, property, or safety.
+							<strong>Legal Requirements:</strong> To comply with laws, respond
+							to valid legal requests, or protect rights, property, or safety.
 						</li>
 						<li>
 							<strong>Business Transfers:</strong> In connection with a merger,
-							acquisition, or asset sale, your data may be transferred as part of
-							that transaction.
+							acquisition, or asset sale, your data may be transferred as part
+							of that transaction.
 						</li>
 					</ul>
 					<p className="mt-2">
-						Note: Your GitHub data is subject to GitHub's Privacy Policy and Terms
-						of Service.
+						Note: Your GitHub data is subject to GitHub's Privacy Policy and
+						Terms of Service.
 					</p>
 				</LegalSection>
 
 				<LegalSection title="Data Retention and Security">
 					<p>
-						We retain your data as long as your account is active or as needed to
-						provide services, comply with legal obligations, resolve disputes, and
-						enforce agreements.
+						We retain your data as long as your account is active or as needed
+						to provide services, comply with legal obligations, resolve
+						disputes, and enforce agreements.
 					</p>
 					<p>
 						We implement reasonable security measures to protect your data,
-						including encryption in transit (HTTPS) and at rest, regular security
-						audits, and access controls. However, no method is 100% secure.
+						including encryption in transit (HTTPS) and at rest, regular
+						security audits, and access controls. However, no method is 100%
+						secure.
 					</p>
 				</LegalSection>
 
@@ -153,8 +153,8 @@ export default function PrivacyPage() {
 				<LegalSection title="Changes to This Policy">
 					<p>
 						We may update this Privacy Policy from time to time. We will notify
-						you of any changes by posting the new policy on this page and updating
-						the "Last updated" date.
+						you of any changes by posting the new policy on this page and
+						updating the "Last updated" date.
 					</p>
 				</LegalSection>
 

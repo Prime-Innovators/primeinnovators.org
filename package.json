@@ -18,7 +18,11 @@
 		"build": "vite-react-ssg build",
 		"preview": "vite preview",
 		"deploy": "npm run build && npx wrangler pages deploy dist --project-name primeinnovators",
-		"tail": "wrangler tail"
+		"tail": "wrangler tail",
+		"lint": "biome check .",
+		"lint:fix": "biome check --write .",
+		"format": "biome format .",
+		"format:write": "biome format --write ."
 	},
 	"dependencies": {
 		"react": "^18.2.0",

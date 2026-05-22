@@ -6,10 +6,7 @@ import HeroSection from "../components/sections/HeroSection";
 import HowItWorksSection from "../components/sections/HowItWorksSection";
 import RecruiterSection from "../components/sections/RecruiterSection";
 import WaitlistSection from "../components/sections/WaitlistSection";
-import {
-	OrganizationSchema,
-	WebSiteSchema,
-} from "../components/seo/JsonLd";
+import { OrganizationSchema, WebSiteSchema } from "../components/seo/JsonLd";
 import { getPageSeo } from "../constants/seo";
 
 export default function HomePage() {

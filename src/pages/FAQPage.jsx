@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import {
+	FAQSchema,
 	OrganizationSchema,
 	WebSiteSchema,
-	FAQSchema,
 } from "../components/seo/JsonLd";
 import GlassCard from "../components/ui/GlassCard";
 import { getPageSeo } from "../constants/seo";

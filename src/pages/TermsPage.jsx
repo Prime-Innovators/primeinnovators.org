@@ -1,8 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import {
-	OrganizationSchema,
-	WebSiteSchema,
-} from "../components/seo/JsonLd";
+import { OrganizationSchema, WebSiteSchema } from "../components/seo/JsonLd";
 import LegalPage from "../components/ui/LegalPage";
 import LegalSection from "../components/ui/LegalSection";
 import { getPageSeo } from "../constants/seo";
@@ -36,14 +33,14 @@ export default function TermsPage() {
 				<LegalSection title="Acceptance of Terms">
 					<p>
 						By accessing or using the Prime Innovators website and platform
-						(collectively, the "Ecosystem"), you agree to be bound by these Terms
-						of Service ("Terms"). If you do not agree to these Terms, do not use
-						the Ecosystem.
+						(collectively, the "Ecosystem"), you agree to be bound by these
+						Terms of Service ("Terms"). If you do not agree to these Terms, do
+						not use the Ecosystem.
 					</p>
 					<p>
-						We reserve the right to modify these Terms at any time. Your continued
-						use of the Ecosystem after any such changes constitutes your
-						acceptance of the new Terms.
+						We reserve the right to modify these Terms at any time. Your
+						continued use of the Ecosystem after any such changes constitutes
+						your acceptance of the new Terms.
 					</p>
 				</LegalSection>
 
@@ -51,14 +48,14 @@ export default function TermsPage() {
 					<p>
 						To access certain features of the Ecosystem, you must create an
 						account. You agree to provide accurate, current, and complete
-						information during registration and to update such information to keep
-						it accurate, current, and complete.
+						information during registration and to update such information to
+						keep it accurate, current, and complete.
 					</p>
 					<p>
 						You are responsible for maintaining the confidentiality of your
-						account and password and for restricting access to your computer. You
-						agree to accept responsibility for all activities that occur under
-						your account or password.
+						account and password and for restricting access to your computer.
+						You agree to accept responsibility for all activities that occur
+						under your account or password.
 					</p>
 					<p>
 						We may suspend or terminate your account if we believe you have
@@ -81,20 +78,21 @@ export default function TermsPage() {
 							promotional material without our prior written consent.
 						</li>
 						<li>
-							To impersonate or attempt to impersonate us, a us employee, another
-							user, or any other person or entity.
+							To impersonate or attempt to impersonate us, a us employee,
+							another user, or any other person or entity.
 						</li>
 						<li>
-							To engage in any behavior that is harassing, harmful, or disruptive
-							to the Ecosystem or its users.
+							To engage in any behavior that is harassing, harmful, or
+							disruptive to the Ecosystem or its users.
 						</li>
 						<li>
 							To interfere with or disrupt the Ecosystem or servers or networks
 							connected to the Ecosystem.
 						</li>
 						<li>
-							To attempt to gain unauthorized access to the Ecosystem, other user
-							accounts, computer systems, or networks connected to the Ecosystem.
+							To attempt to gain unauthorized access to the Ecosystem, other
+							user accounts, computer systems, or networks connected to the
+							Ecosystem.
 						</li>
 						<li>
 							To use the Ecosystem in any manner that could disable, overburden,
@@ -110,7 +108,8 @@ export default function TermsPage() {
 						content. However, you grant us a worldwide, royalty-free, perpetual,
 						irrevocable, non-exclusive license to use, reproduce, modify, adapt,
 						publish, translate, distribute, and display such content solely for
-						the purpose of operating and promoting the Prime Innovators Ecosystem.
+						the purpose of operating and promoting the Prime Innovators
+						Ecosystem.
 					</p>
 					<p>
 						You represent and warrant that you own or control all rights to your
@@ -121,10 +120,11 @@ export default function TermsPage() {
 
 				<LegalSection title="Sponsorships and Stipends">
 					<p>
-						Prime Innovators may facilitate sponsorships and stipends for verified
-						contributions. All such transactions are governed by the terms of the
-						payment processors we use (JazzCash, Easypaisa, Stripe). We are not
-						liable for any delays, failures, or issues in payment processing.
+						Prime Innovators may facilitate sponsorships and stipends for
+						verified contributions. All such transactions are governed by the
+						terms of the payment processors we use (JazzCash, Easypaisa,
+						Stripe). We are not liable for any delays, failures, or issues in
+						payment processing.
 					</p>
 					<p>
 						We reserve the right to adjust, suspend, or terminate sponsorship
@@ -136,8 +136,9 @@ export default function TermsPage() {
 					<p>
 						Recruiters and sponsors may access verified contributor profiles for
 						the purpose of identifying talent. Such access is read-only and does
-						not include direct messaging capabilities through our platform. We do
-						not share private contact information without explicit user consent.
+						not include direct messaging capabilities through our platform. We
+						do not share private contact information without explicit user
+						consent.
 					</p>
 				</LegalSection>
 
@@ -149,17 +150,17 @@ export default function TermsPage() {
 						property or proprietary rights laws.
 					</p>
 					<p>
-						Our trademarks and trade dress may not be used in connection with any
-						product or service without our prior written consent.
+						Our trademarks and trade dress may not be used in connection with
+						any product or service without our prior written consent.
 					</p>
 				</LegalSection>
 
 				<LegalSection title="Disclaimer">
 					<p>
 						THE ECOSYSTEM IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS.
-						PRIME INNOVATORS DISCLAIMS ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS
-						OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
-						MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+						PRIME INNOVATORS DISCLAIMS ALL WARRANTIES OF ANY KIND, WHETHER
+						EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
+						WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
 						NON-INFRINGEMENT.
 					</p>
 					<p>
@@ -180,20 +181,20 @@ export default function TermsPage() {
 						BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
 					</p>
 					<p>
-						TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE TOTAL LIABILITY
-						OF PRIME INNOVATORS FOR ANY AND ALL DAMAGES SHALL NOT EXCEED THE
-						AMOUNT PAID BY YOU, IF ANY, FOR ACCESSING THE ECOSYSTEM.
+						TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE TOTAL
+						LIABILITY OF PRIME INNOVATORS FOR ANY AND ALL DAMAGES SHALL NOT
+						EXCEED THE AMOUNT PAID BY YOU, IF ANY, FOR ACCESSING THE ECOSYSTEM.
 					</p>
 				</LegalSection>
 
 				<LegalSection title="Indemnification">
 					<p>
-						You agree to defend, indemnify, and hold harmless Prime Innovators and
-						its officers, directors, employees, and agents, from and against any
-						claims, liabilities, damages, losses, and expenses, including
+						You agree to defend, indemnify, and hold harmless Prime Innovators
+						and its officers, directors, employees, and agents, from and against
+						any claims, liabilities, damages, losses, and expenses, including
 						reasonable attorneys' fees, arising out of or in any way connected
-						with your access to or use of the Ecosystem or your violation of these
-						Terms.
+						with your access to or use of the Ecosystem or your violation of
+						these Terms.
 					</p>
 				</LegalSection>
 
@@ -225,8 +226,8 @@ export default function TermsPage() {
 				<LegalSection title="Changes to Terms">
 					<p>
 						We reserve the right, at our sole discretion, to modify or replace
-						these Terms at any time. If a revision is material, we will provide at
-						least 30 days' notice prior to any new Terms taking effect. What
+						these Terms at any time. If a revision is material, we will provide
+						at least 30 days' notice prior to any new Terms taking effect. What
 						constitutes a material change will be determined at our sole
 						discretion.
 					</p>

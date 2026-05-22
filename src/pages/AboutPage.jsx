@@ -2,10 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import WaitlistForm from "../components/forms/WaitlistForm";
 import EcosystemRolesSection from "../components/sections/EcosystemRolesSection";
-import {
-	OrganizationSchema,
-	WebSiteSchema,
-} from "../components/seo/JsonLd";
+import { OrganizationSchema, WebSiteSchema } from "../components/seo/JsonLd";
 import GlassCard from "../components/ui/GlassCard";
 import SectionHeader from "../components/ui/SectionHeader";
 import { milestones, problems, team, values } from "../constants/ecosystem";

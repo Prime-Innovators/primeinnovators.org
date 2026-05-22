@@ -1,0 +1,28 @@
+# Set default behavior to automatically handle line endings.
+* text=auto
+
+# Force LF line endings for all text files (critical for cross-platform Node/Vite development)
+*.js text eol=lf
+*.jsx text eol=lf
+*.json text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sql text eol=lf
+*.toml text eol=lf
+
+# Explicitly declare binary files that should not be normalized
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg text
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.eot binary
+*.ttf binary
+*.otf binary

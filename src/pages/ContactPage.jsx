@@ -1,9 +1,9 @@
-import { Helmet } from "react-helmet-async";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import {
+	ContactSchema,
 	OrganizationSchema,
 	WebSiteSchema,
-	ContactSchema,
 } from "../components/seo/JsonLd";
 import { getPageSeo } from "../constants/seo";
 
