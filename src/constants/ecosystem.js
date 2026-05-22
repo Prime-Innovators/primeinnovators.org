@@ -91,6 +91,13 @@ export const team = [
 		linkedin: "https://linkedin.com/in/msaeedsaeedi",
 	},
 	{
+		name: "Mustafa Ahsan Khan",
+		role: "Chief Marketing Officer",
+		bio: "Brand strategy, growth marketing, and community engagement. Building a movement around verified open-source contributions.",
+		image: "/images/team/mustafa-ahsan-khan.webp",
+		linkedin: "https://www.linkedin.com/in/mustafaahsankhan",
+	},
+	{
 		name: "Warisha Shaukat",
 		role: "Security Engineer",
 		bio: "Ensuring platform security and building trust through transparent, auditable systems. Expert in secure credential architecture.",
@@ -101,7 +108,7 @@ export const team = [
 		name: "Ahmed Habib",
 		role: "AI/ML Engineer",
 		bio: "Building intelligent systems to verify contributions and score impact. Making AI-powered reputation verification possible.",
-		image: "/images/team/ahmed-habib.webp",
+		// image: "/images/team/ahmed-habib.webp",
 		linkedin: "https://www.linkedin.com/in/ahmad-habib-044579347",
 	},
 	{
@@ -110,5 +117,26 @@ export const team = [
 		bio: "Designing machine learning models for contributor assessment and ecosystem analytics. Turning data into actionable insights.",
 		image: "/images/team/mohammad-haris.webp",
 		linkedin: "https://www.linkedin.com/in/muhammad-haris-455166294",
+	},
+	{
+		name: "Mohammad Jibran",
+		role: "Backend Engineer",
+		bio: "Designing scalable, secure backend systems to power the ecosystem. Building the infrastructure for verifiable contributions and transparent transactions.",
+		// image: "/images/team/mohammad-jibran.webp",
+		linkedin: "https://www.linkedin.com/in/muhammad-jibran-3134c",
+	},
+	{
+		name: "Muhammad Hasaam",
+		role: "Frontend Engineer",
+		bio: "Crafting intuitive, user-friendly interfaces for contributors, maintainers, and sponsors. Making complex data accessible and actionable.",
+		// image: "/images/team/muhammad-hasaam.webp",
+		linkedin: "https://www.linkedin.com/in/m-hasaam",
+	},
+	{
+		name: "Ermish Tabassum",
+		role: "Learning Experience Architect",
+		bio: "Designing educational pathways and skill development frameworks for contributors. Creating a learning ecosystem that fosters growth and verified skill acquisition.",
+		image: "/images/team/ermish-tabassum.webp",
+		linkedin: "https://www.linkedin.com/in/ermish-tabassum-b24244331",
 	},
 ];
