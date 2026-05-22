@@ -316,6 +316,7 @@ function EcosystemIncentivesSection() {
 								stroke="currentColor"
 								viewBox="0 0 24 24"
 							>
+								<title>Join as Contributor icon</title>
 								<path
 									strokeLinecap="round"
 									strokeLinejoin="round"
@@ -367,6 +368,7 @@ function EcosystemIncentivesSection() {
 								stroke="currentColor"
 								viewBox="0 0 24 24"
 							>
+								<title>Submit a Project icon</title>
 								<path
 									strokeLinecap="round"
 									strokeLinejoin="round"
@@ -416,6 +418,7 @@ function EcosystemIncentivesSection() {
 								stroke="currentColor"
 								viewBox="0 0 24 24"
 							>
+								<title>Partner With Us icon</title>
 								<path
 									strokeLinecap="round"
 									strokeLinejoin="round"
@@ -467,6 +470,7 @@ function EcosystemIncentivesSection() {
 								stroke="currentColor"
 								viewBox="0 0 24 24"
 							>
+								<title>Explore Recruiter Access icon</title>
 								<path
 									strokeLinecap="round"
 									strokeLinejoin="round"
