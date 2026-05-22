@@ -147,14 +147,14 @@ export default function FAQPage() {
 
 			<section className="pb-24 md:pb-32 section-container">
 				<div className="max-w-4xl mx-auto space-y-8">
-					{faqSections.map((section, sectionIndex) => (
-						<div key={sectionIndex} className="space-y-6">
+					{faqSections.map((section) => (
+						<div key={section.label} className="space-y-6">
 							<h2 className="text-2xl font-semibold text-on-surface">
 								{section.label}
 							</h2>
 							<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-								{section.questions.map((qa, qIndex) => (
-									<GlassCard key={`${sectionIndex}-${qIndex}`} className="p-5">
+								{section.questions.map((qa) => (
+									<GlassCard key={`${section.label}-${qa.q}`} className="p-5">
 										<h3 className="font-semibold text-on-surface mb-2">
 											{qa.q}
 										</h3>
