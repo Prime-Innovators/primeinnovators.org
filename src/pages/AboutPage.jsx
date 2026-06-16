@@ -770,13 +770,20 @@ function FinalRoleCtaSection() {
 						>
 							<span>Partner / Sponsor</span>
 						</Link>
-						<Link
-							to="/contact?type=general"
-							className="col-span-2 md:col-span-1 px-4 py-3 rounded-lg border border-white/10 text-xs font-bold text-on-surface hover:bg-white/5 hover:border-primary-fixed/20 transition-all flex items-center justify-center gap-1.5"
+						<button
+							type="button"
+							disabled
+							className="col-span-2 md:col-span-1 px-4 py-3 rounded-lg border border-white/10 text-xs font-bold text-on-surface-variant bg-white/5 cursor-not-allowed opacity-70 flex items-center justify-center gap-1.5"
+							aria-disabled="true"
+							title="Ambassador program coming soon"
 						>
-							<span>Explore Ambassadors</span>
-						</Link>
+							<span>Ambassador program coming soon</span>
+						</button>
 					</div>
+					<p className="text-xs text-on-surface-variant/70 mt-8">
+						Want to start a campus chapter? Email hello@primeinnovators.org and
+						we will route it to the right team.
+					</p>
 				</GlassCard>
 			</div>
 		</section>

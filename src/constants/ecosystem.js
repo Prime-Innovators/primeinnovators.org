@@ -121,7 +121,7 @@ export const team = [
 		name: "Mohammad Jibran",
 		role: "Backend Engineer",
 		bio: "Designing scalable, secure backend systems to power the ecosystem. Building the infrastructure for verifiable contributions and transparent transactions.",
-		// image: "/images/team/mohammad-jibran.webp",
+		image: "/images/team/mohammad-jibran.webp",
 		linkedin: "https://www.linkedin.com/in/muhammad-jibran-3134c",
 	},
 	{

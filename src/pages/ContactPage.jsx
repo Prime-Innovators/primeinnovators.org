@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
 import {
 	ContactSchema,
 	OrganizationSchema,
@@ -7,16 +8,51 @@ import {
 } from "../components/seo/JsonLd";
 import { getPageSeo } from "../constants/seo";
 
+const inquiryPresets = {
+	maintainer: {
+		badge: "Project submission",
+		subject: "Project submission inquiry",
+		helpText:
+			"Use this if you want to submit a project or ask about maintainer support.",
+	},
+	sponsor: {
+		badge: "Sponsorship",
+		subject: "Sponsorship inquiry",
+		helpText: "Use this for sponsorship, partnership, or funding questions.",
+	},
+	recruiter: {
+		badge: "Recruiter access",
+		subject: "Recruiter access inquiry",
+		helpText: "Use this if you want to learn about verified talent discovery.",
+	},
+	general: {
+		badge: "General inquiry",
+		subject: "General inquiry",
+		helpText:
+			"Use this for anything else, including ambassadors and campus chapter questions.",
+	},
+};
+
 export default function ContactPage() {
+	const { search } = useLocation();
+	const inquiryType = new URLSearchParams(search).get("type") || "general";
+	const inquiry = inquiryPresets[inquiryType] || inquiryPresets.general;
 	const meta = getPageSeo("/contact");
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
-		subject: "",
+		subject: inquiry.subject,
 		message: "",
 	});
 	const [status, setStatus] = useState("idle");
 	const [message, setMessage] = useState("");
+
+	useEffect(() => {
+		setFormData((prev) => ({
+			...prev,
+			subject: inquiry.subject,
+		}));
+	}, [inquiry.subject]);
 
 	const handleChange = (e) => {
 		setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -34,27 +70,19 @@ export default function ContactPage() {
 		setStatus("loading");
 		setMessage("");
 
-		try {
-			const response = await fetch("https://api.primeinnovators.org/contact", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(formData),
-			});
+		const lines = [
+			`Name: ${formData.name.trim()}`,
+			`Email: ${formData.email.trim()}`,
+			`Subject: ${formData.subject.trim() || inquiry.subject}`,
+			"",
+			formData.message.trim(),
+		].filter(Boolean);
 
-			if (response.ok) {
-				setStatus("success");
-				setMessage("Message sent! We'll get back to you soon.");
-				setFormData({ name: "", email: "", subject: "", message: "" });
-			} else {
-				const data = await response.json();
-				setStatus("error");
-				setMessage(data.error || "Something went wrong. Please try again.");
-			}
-		} catch {
-			setStatus("success");
-			setMessage("Message sent! We'll get back to you soon.");
-			setFormData({ name: "", email: "", subject: "", message: "" });
-		}
+		const mailtoUrl = `mailto:hello@primeinnovators.org?subject=${encodeURIComponent(formData.subject.trim() || inquiry.subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+
+		window.location.href = mailtoUrl;
+		setStatus("success");
+		setMessage("Opening your email app to hello@primeinnovators.org.");
 	};
 
 	return (
@@ -83,7 +111,7 @@ export default function ContactPage() {
 			<header className="py-24 md:py-32 section-container">
 				<div className="max-w-3xl mx-auto text-center space-y-4">
 					<span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
-						Contact
+						{inquiry.badge}
 					</span>
 					<h1 className="text-3xl md:text-4xl font-bold text-on-surface">
 						Get in touch
@@ -91,6 +119,14 @@ export default function ContactPage() {
 					<p className="text-lg text-on-surface-variant">
 						Have a question, idea, or want to partner with us? We'd love to hear
 						from you.
+					</p>
+					<p className="text-sm text-on-surface-variant/80 max-w-2xl mx-auto">
+						{inquiry.helpText} If your email app does not open, write directly
+						to{" "}
+						<a href="mailto:hello@primeinnovators.org" className="underline">
+							hello@primeinnovators.org
+						</a>
+						.
 					</p>
 				</div>
 			</header>
@@ -188,7 +224,9 @@ export default function ContactPage() {
 								disabled={status === "loading"}
 								className="w-full h-12 rounded-lg font-medium bg-primary text-on-primary hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
 							>
-								{status === "loading" ? "Sending..." : "Send Message"}
+								{status === "loading"
+									? "Preparing email..."
+									: "Open Email Draft"}
 							</button>
 
 							{message && (

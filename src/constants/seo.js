@@ -27,16 +27,16 @@ const defaults = {
 export const seo = {
 	"/": {
 		...defaults,
-		title: "PrimeInnovators - Pakistan's Open-Source Talent Ecosystem",
+		title: "Prime Innovators | Pakistan's Open-Source Talent Ecosystem",
 		description:
 			"Pakistan's first open-source talent ecosystem is under development. Join the waitlist to be part of the nation's verified talent network connecting contributors, maintainers, sponsors, and recruiters.",
-		ogTitle: "PrimeInnovators - Pakistan's Open-Source Talent Ecosystem",
+		ogTitle: "Prime Innovators | Pakistan's Open-Source Talent Ecosystem",
 		ogDescription:
 			"A national ecosystem where contributors earn trust through verified work, maintainers attract motivated teams, sponsors fund with transparency, and recruiters discover proven talent.",
 	},
 	"/about": {
 		...defaults,
-		title: "About - Prime Innovators",
+		title: "About Prime Innovators | Pakistan's Open-Source Talent Ecosystem",
 		description:
 			"Learn about Prime Innovators' mission to turn open-source contributions into verified, portable reputation — so talent is judged by what they build, not what they claim.",
 		ogTitle: "About Prime Innovators - Pakistan's Open-Source Talent Network",
@@ -45,7 +45,7 @@ export const seo = {
 	},
 	"/faq": {
 		...defaults,
-		title: "FAQ - Prime Innovators",
+		title: "FAQ | Prime Innovators",
 		description:
 			"Frequently asked questions about Prime Innovators ecosystem — how to join, contribute, sponsor, and recruit through Pakistan's open-source talent network.",
 		ogTitle: "FAQ - Prime Innovators Open-Source Ecosystem",
@@ -54,17 +54,17 @@ export const seo = {
 	},
 	"/contact": {
 		...defaults,
-		ogType: "contact",
-		title: "Contact - Prime Innovators",
+		ogType: "website",
+		title: "Contact Prime Innovators | Pakistan's Open-Source Talent Ecosystem",
 		description:
-			"Get in touch with Prime Innovators. Have a question, idea, or want to partner? We'd love to hear from you.",
+			"Get in touch with Prime Innovators. Use the form to open a prefilled email draft to hello@primeinnovators.org for project, sponsorship, or recruiter inquiries.",
 		ogTitle: "Contact Prime Innovators",
 		ogDescription:
 			"Reach out to Prime Innovators for partnerships, inquiries, or support. We're building Pakistan's open-source talent ecosystem.",
 	},
 	"/privacy": {
 		...defaults,
-		title: "Privacy Policy - Prime Innovators",
+		title: "Privacy Policy | Prime Innovators",
 		description:
 			"Prime Innovators privacy policy — how we collect, use, and protect your data in our open-source talent ecosystem.",
 		ogTitle: "Privacy Policy - Prime Innovators",
@@ -73,7 +73,7 @@ export const seo = {
 	},
 	"/terms": {
 		...defaults,
-		title: "Terms of Service - Prime Innovators",
+		title: "Terms of Service | Prime Innovators",
 		description:
 			"Prime Innovators terms of service governing the use of our open-source talent ecosystem platform.",
 		ogTitle: "Terms of Service - Prime Innovators",
@@ -82,7 +82,7 @@ export const seo = {
 	},
 	"/coc": {
 		...defaults,
-		title: "Code of Conduct - Prime Innovators",
+		title: "Code of Conduct | Prime Innovators",
 		description:
 			"Prime Innovators code of conduct based on Contributor Covenant v2.1 — our commitment to a harassment-free community.",
 		ogTitle: "Code of Conduct - Prime Innovators",
@@ -91,7 +91,7 @@ export const seo = {
 	},
 	"/404": {
 		...defaults,
-		title: "Page Not Found - Prime Innovators",
+		title: "Page Not Found | Prime Innovators",
 		description:
 			"The page you're looking for doesn't exist. Return to Prime Innovators homepage.",
 		ogTitle: "Page Not Found - Prime Innovators",

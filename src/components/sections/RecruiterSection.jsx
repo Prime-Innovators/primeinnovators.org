@@ -185,7 +185,7 @@ export default function RecruiterSection() {
 							</svg>
 						</a>
 						<a
-							href="mailto:contact@primeinnovators.org"
+							href="mailto:hello@primeinnovators.org"
 							className="btn-secondary px-8 py-4 rounded-lg font-bold transition-all hover:-translate-y-0.5"
 						>
 							Sponsor this project
