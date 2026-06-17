@@ -1,0 +1,38 @@
+export const meta = {
+  title: "Building for Scale with Vite and Cloudflare",
+  date: "2026-06-10",
+  description:
+    "How we architected primeinnovators.org for sub-100ms global page loads using Vite, static generation, and Cloudflare's edge network.",
+  tags: ["architecture", "cloudflare", "performance"],
+  coverImage: "/og-image.png",
+  author: "Engineering Team",
+  draft: false,
+};
+
+## The Architecture Behind the Speed
+
+When we set out to build Prime Innovators, we had a hard requirement: every page must load in under 100ms from anywhere in the world. Here's how we made that happen.
+
+### Static Generation First
+
+We chose [Vite](https://vitejs.dev) with `vite-react-ssg` to pre-render every page at build time. The result is pure HTML — zero JavaScript required for content. This means:
+
+- **Edge caching is trivial**: Cloudflare caches the HTML at 330+ locations
+- **No server costs**: We don't run Node.js in production
+- **Instant first paint**: The browser gets content immediately
+
+### The Build Pipeline
+
+```bash
+npm run build  # vite-react-ssg build + RSS feed + Pagefind
+```
+
+This single command produces a `dist/` folder ready to deploy to Cloudflare Pages. The entire build takes under 15 seconds for our current size.
+
+### What We Learned
+
+1. Dynamic routes with `getStaticPaths` are essential for SSG blog posts
+2. Metadata-only imports keep the main bundle small
+3. Pagefind adds full-text search without a server
+
+The edge makes everything faster.

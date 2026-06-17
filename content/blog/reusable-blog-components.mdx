@@ -1,0 +1,196 @@
+import Badge from "../../src/components/blog/Badge";
+import Callout from "../../src/components/blog/Callout";
+import CodeTabs from "../../src/components/blog/CodeTabs";
+import FAQAccordion from "../../src/components/blog/FAQAccordion";
+import BenchmarkStats from "../../src/components/blog/BenchmarkStats";
+import MetricsChart from "../../src/components/blog/MetricsChart";
+
+export const meta = {
+  title: "Author Guide: Reusable Interactive Blog Components",
+  date: "2026-06-18",
+  description:
+    "A comprehensive gallery and user manual demonstrating how to write rich, interactive articles using our custom React MDX components.",
+  tags: ["writing", "meta", "components", "ux"],
+  coverImage: "/og-image.png",
+  author: "Engineering Team",
+  draft: false,
+};
+
+## Writing Interactive Technical Content
+
+Our blog supports **MDX**, allowing authors to import and render interactive React components alongside standard Markdown. This guide documents the available components, their visual presentations, and copy-pasteable examples.
+
+---
+
+### 1. Badge Component
+
+Badges are inline highlights useful for tech stack tag indicators, labels, or versions.
+
+<div className="my-4 flex flex-wrap gap-2">
+  <Badge variant="primary">primary</Badge>
+  <Badge variant="secondary">secondary</Badge>
+  <Badge variant="info">info</Badge>
+  <Badge variant="warning">warning</Badge>
+  <Badge variant="error">error</Badge>
+</div>
+
+```jsx
+import Badge from "../../src/components/blog/Badge";
+
+We support <Badge variant="secondary">Cloudflare Workers</Badge> and <Badge variant="primary">React</Badge> features.
+```
+
+---
+
+### 2. Callout Boxes
+
+Callouts display highlighted side-notes, recommendations, or warnings inside articles. They feature premium glassmorphism, accent colors, and matching icons.
+
+<Callout type="info" title="General Note">
+  This is a general informational callout for general context.
+</Callout>
+
+<Callout type="success" title="Performance Optimization Success">
+  This highlights a successful deployment result or recommendation.
+</Callout>
+
+<Callout type="warning" title="Important Warning">
+  Use warning boxes to point out configuration issues or security notices.
+</Callout>
+
+<Callout type="error" title="Critical Bug / Failure Alert">
+  Point out bad practices, breaking changes, or code errors.
+</Callout>
+
+```jsx
+import Callout from "../../src/components/blog/Callout";
+
+<Callout type="warning" title="Important Warning">
+  Use warning boxes to point out configuration issues or security notices.
+</Callout>
+```
+
+---
+
+### 3. Code Tabs
+
+Use code tabs to switch between languages, frameworks, version updates, or environment configurations.
+
+<CodeTabs>
+  <div label="JavaScript API">
+    ```javascript
+    // Fetch D1 data
+    const { results } = await env.DB.prepare("SELECT * FROM waitlist").all();
+    return Response.json(results);
+    ```
+  </div>
+  <div label="TypeScript API">
+    ```typescript
+    // Type-safe D1 execution
+    interface User { id: number; email: string; }
+    const { results } = await env.DB.prepare("SELECT * FROM waitlist").all<User>();
+    return Response.json(results);
+    ```
+  </div>
+</CodeTabs>
+
+````jsx
+import CodeTabs from "../../src/components/blog/CodeTabs";
+
+<CodeTabs>
+  <div label="JavaScript API">
+    ```javascript
+    // Code snippet
+    ```
+  </div>
+  <div label="TypeScript API">
+    ```typescript
+    // Code snippet
+    ```
+  </div>
+</CodeTabs>
+````
+
+---
+
+### 4. Benchmark Stats Comparison
+
+Perfect for displaying key before/after numbers from profile reports, benchmarks, or latency optimizations.
+
+<BenchmarkStats
+  before="420ms"
+  after="21ms"
+  label="FCP Optimization using Edge SSR"
+  percent="95%"
+  improvement={true}
+/>
+
+```jsx
+import BenchmarkStats from "../../src/components/blog/BenchmarkStats";
+
+<BenchmarkStats
+  before="420ms"
+  after="21ms"
+  label="FCP Optimization using Edge SSR"
+  percent="95%"
+  improvement={true}
+/>
+```
+
+---
+
+### 5. Metrics Chart
+
+A responsive, high-performance bar chart supporting interactive tabs, gridlines, and tooltips.
+
+<MetricsChart
+  title="SSG Build Time Benchmarks"
+  subtitle="Comparing site generation speeds (seconds) across frameworks"
+  data={[18, 12, 5, 2, 1, 1]}
+  labels={["Next.js", "Gatsby", "Vite SSG", "Hugo", "Astro", "Pagefind"]}
+/>
+
+```jsx
+import MetricsChart from "../../src/components/blog/MetricsChart";
+
+<MetricsChart
+  title="SSG Build Time Benchmarks"
+  subtitle="Comparing site generation speeds (seconds) across frameworks"
+  data={[18, 12, 5, 2, 1, 1]}
+  labels={["Next.js", "Gatsby", "Vite SSG", "Hugo", "Astro", "Pagefind"]}
+/>
+```
+
+---
+
+### 6. FAQ Accordion
+
+An expandable question-and-answer list that lets readers explore secondary details or FAQs in a collapsed layout.
+
+<FAQAccordion
+  items={[
+    {
+      q: "Can I use multiple components in a single post?",
+      a: "Yes, you can import and place multiple different components in any order inside your MDX file.",
+    },
+    {
+      q: "Is there a limit to the number of bars in a MetricsChart?",
+      a: "No, but we recommend between 3 to 8 items to ensure the labels remain readable on mobile layouts.",
+    },
+  ]}
+/>
+
+```jsx
+import FAQAccordion from "../../src/components/blog/FAQAccordion";
+
+<FAQAccordion items={[
+  { q: "Question 1", a: "Answer text goes here." },
+  { q: "Question 2", a: "Answer text goes here." }
+]} />
+```
+
+---
+
+### Takeaway
+
+Use these components to write premium developer guides that captivate readers, maintain a state-of-the-art developer brand, and deliver clear metrics visualization.

@@ -1,0 +1,84 @@
+export const meta = {
+  title: "SSG, SEO, and Generative Engine Optimization (GEO)",
+  date: "2026-06-12",
+  description:
+    "How static site generation paired with structured data and semantic HTML creates content that ranks for both traditional search engines and LLM-powered discovery.",
+  tags: ["seo", "geo", "ssg", "llm"],
+  coverImage: "/og-image.png",
+  author: "Engineering Team",
+  draft: false,
+};
+
+## Why SSG Wins for SEO and LLM Discovery
+
+Static Site Generation (SSG) produces pure HTML — no JavaScript required for content rendering. This is critical for both traditional crawlers (Googlebot) and emerging LLM scrapers (GPT, Claude, Gemini) that parse the raw document tree.
+
+### What LLMs See vs What Users See
+
+| Aspect | Client-Side Render (CSR) | Static Site (SSG) |
+| --- | --- | --- |
+| Initial HTML | Empty shell | Full content |
+| JS required | Yes | No |
+| Crawl budget | Wasted on JS parsing | 100% content |
+| LLM parseable | Only if pre-rendered | Always |
+
+### Structured Data for GEO
+
+Generative Engine Optimization (GEO) is about making content **directly answerable** by LLMs. The key techniques are:
+
+#### 1. JSON-LD Article Schema
+
+Every blog post should embed an `Article` (or `TechArticle`) schema:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "SSG, SEO, and Generative Engine Optimization",
+  "description": "How static site generation...",
+  "author": { "@type": "Person", "name": "Engineering Team" },
+  "datePublished": "2026-06-12",
+  "proficiencyLevel": "Intermediate"
+}
+```
+
+#### 2. Semantic HTML Hierarchy
+
+LLMs derive meaning from heading structure (h1 → h2 → h3). Flat or nested divs lose signal.
+
+**Bad:**
+```html
+<div class="title">Section</div>
+<div class="body">Content here</div>
+```
+
+**Good:**
+```html
+<h2>Section</h2>
+<p>Content here</p>
+```
+
+#### 3. FAQ / Q&A Patterns
+
+LLMs frequently extract answers from FAQ sections. Use `FAQPage` schema for structured extraction.
+
+### Pagefind for Search
+
+For SSG sites, [Pagefind](https://pagefind.app/) indexes the compiled HTML output — indexing exactly what Google and LLMs see. No mismatch between search results and actual content.
+
+```bash
+npx pagefind --site dist
+```
+
+### Performance Metrics
+
+Our SSG setup delivers:
+
+- **Lighthouse score:** 98+ on all pages
+- **First Contentful Paint:** &lt;500ms globally (Cloudflare CDN)
+- **Total JS per blog page:** 0KB (pure HTML) + ~170KB for interactive shell (cached)
+- **Search index size:** ~5KB per page (Pagefind)
+
+### Key Takeaway
+
+> Build for the crawler first, enhance for the user second. SSG + structured data is the only reliable way to rank in both traditional and generative search.
