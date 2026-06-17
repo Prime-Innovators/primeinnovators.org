@@ -68,6 +68,7 @@ export default function BlogIndexPage() {
 	const totalPages = Math.max(1, Math.ceil(filtered.length / POSTS_PER_PAGE));
 	const safePage = Math.min(page, totalPages);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: scroll to top when page changes
 	useEffect(() => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
 	}, [safePage]);
