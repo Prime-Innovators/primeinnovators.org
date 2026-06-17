@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 const links = [
 	{ label: "Home", to: "/" },
 	{ label: "About", to: "/about" },
+	{ label: "Blog", to: "/blog" },
 	{ label: "Contact", to: "/contact" },
 ];
 
@@ -36,6 +37,11 @@ export default function Navigation() {
 		window.addEventListener("keydown", onKeyDown);
 		return () => window.removeEventListener("keydown", onKeyDown);
 	}, []);
+
+	const isActive = (to) =>
+		to === "/"
+			? pathname === "/"
+			: pathname === to || pathname.startsWith(`${to}/`);
 
 	const linkClass = (active) =>
 		`rounded-full px-4 py-2 text-label-md transition-all duration-300 ${
@@ -77,7 +83,7 @@ export default function Navigation() {
 							<Link
 								key={link.label}
 								to={link.to}
-								className={linkClass(pathname === link.to)}
+								className={linkClass(isActive(link.to))}
 							>
 								{link.label}
 							</Link>
@@ -155,13 +161,13 @@ export default function Navigation() {
 									to={link.to}
 									onClick={() => setIsMobileOpen(false)}
 									className={`flex items-center justify-between rounded-xl px-4 py-3 text-label-md transition-colors ${
-										pathname === link.to
+										isActive(link.to)
 											? "bg-white/8 text-primary-fixed"
 											: "text-on-surface-variant hover:bg-white/5 hover:text-on-surface"
 									}`}
 								>
 									<span>{link.label}</span>
-									{pathname === link.to ? (
+									{isActive(link.to) ? (
 										<span className="text-label-sm uppercase tracking-[0.18em] text-primary-fixed/75">
 											Current
 										</span>

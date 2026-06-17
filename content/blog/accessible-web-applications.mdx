@@ -1,0 +1,39 @@
+export const meta = {
+  title: "Building Accessible Web Applications — Beyond Compliance",
+  date: "2026-05-28",
+  description:
+    "How we approach accessibility at Prime Innovators: semantic HTML, ARIA best practices, and testing with real assistive technology.",
+  tags: ["a11y", "frontend", "ux"],
+  coverImage: "/og-image.png",
+  author: "Engineering Team",
+  draft: false,
+};
+
+## Accessibility as a Feature
+
+Accessibility isn't a checklist — it's a design philosophy. At Prime Innovators, we treat a11y as a first-class concern from the start.
+
+### Our Accessibility Stack
+
+1. **Semantic HTML**: We use `<nav>`, `<main>`, `<article>`, `<search>`, and other landmarks
+2. **ARIA labels**: Every interactive element has a descriptive label
+3. **Keyboard navigation**: Full support for Tab, Enter, Escape
+4. **Color contrast**: All text meets WCAG AA standards (4.5:1 ratio)
+
+### Common Patterns
+
+```jsx
+// Bad: div as button
+<div onClick={handleSearch}>Search</div>
+
+// Good: semantic button
+<button type="button" onClick={handleSearch} aria-label="Search blog posts">
+  Search
+</button>
+```
+
+### Testing Tools
+
+We use axe-core in CI, paired with manual testing using VoiceOver (macOS) and NVDA (Windows). Automated tests catch about 57% of issues — the rest require human judgment.
+
+Building for everyone isn't just ethical. It makes for better software.

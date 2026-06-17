@@ -1,0 +1,52 @@
+export const meta = {
+  title: "TypeScript Patterns for Large React Applications",
+  date: "2026-05-22",
+  description:
+    "Advanced TypeScript patterns that keep our React codebase maintainable as it grows — discriminated unions, branded types, and exhaustive checks.",
+  tags: ["typescript", "react", "architecture"],
+  coverImage: "/og-image.png",
+  author: "Engineering Team",
+  draft: false,
+};
+
+## TypeScript at Scale
+
+As our React application grows, raw TypeScript isn't enough. We need patterns that make illegal states unrepresentable.
+
+### Discriminated Unions for API States
+
+```typescript
+type RequestState<T> =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: T }
+  | { status: "error"; error: Error };
+
+function renderState<T>(state: RequestState<T>) {
+  switch (state.status) {
+    case "idle": return <Idle />;
+    case "loading": return <Spinner />;
+    case "success": return <Data data={state.data} />;
+    case "error": return <Error error={state.error} />;
+  }
+}
+```
+
+### Branded Types for IDs
+
+```typescript
+type UserId = string & { __brand: "UserId" };
+type PostId = string & { __brand: "PostId" };
+
+function getUser(id: UserId) { /* ... */ }
+function getPost(id: PostId) { /* ... */ }
+
+// Type error — can't pass PostId where UserId is expected
+getUser(postId as PostId);
+```
+
+### Exhaustive Switch Checks
+
+Use `never` to ensure all cases are handled at compile time. The TypeScript compiler catches missing cases before they reach production.
+
+TypeScript isn't just about catching bugs. It's about encoding your domain model in the type system.

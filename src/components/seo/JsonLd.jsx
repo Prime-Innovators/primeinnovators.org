@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { SITE_NAME, SITE_URL } from "../../constants/seo";
 
 export function OrganizationSchema() {
 	const schema = {
@@ -54,6 +55,43 @@ export function FAQSchema({ questions }) {
 			},
 		})),
 	};
+
+	return (
+		<Helmet>
+			<script type="application/ld+json">{JSON.stringify(schema)}</script>
+		</Helmet>
+	);
+}
+
+export function ArticleSchema({
+	title,
+	description,
+	publishedAt,
+	author = "Prime Innovators",
+	image,
+	tags,
+}) {
+	const schema = {
+		"@context": "https://schema.org",
+		"@type": "TechArticle",
+		headline: title,
+		description,
+		image,
+		datePublished: publishedAt,
+		author: {
+			"@type": "Person",
+			name: author,
+		},
+		publisher: {
+			"@type": "Organization",
+			name: SITE_NAME,
+			url: SITE_URL,
+		},
+	};
+
+	if (tags?.length > 0) {
+		schema.keywords = tags.join(", ");
+	}
 
 	return (
 		<Helmet>

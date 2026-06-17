@@ -1,10 +1,125 @@
+import { readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { join, resolve } from "node:path";
+import mdx from "@mdx-js/rollup";
 import react from "@vitejs/plugin-react";
+import * as acorn from "acorn";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeSlug from "rehype-slug";
+import remarkGfm from "remark-gfm";
 import { defineConfig } from "vite";
 import sitemap from "vite-plugin-sitemap";
 
+function parseMetaObject(exprStr) {
+	const ast = acorn.parse(`(${exprStr})`, { ecmaVersion: 2022 });
+	let expr = ast.body[0]?.expression;
+	if (expr?.type === "ParenthesizedExpression") expr = expr.expression;
+	if (!expr || expr.type !== "ObjectExpression") return null;
+	const result = {};
+	for (const prop of expr.properties) {
+		if (prop.type !== "Property") continue;
+		const key =
+			prop.key.type === "Identifier"
+				? prop.key.name
+				: prop.key.type === "Literal"
+					? String(prop.key.value)
+					: null;
+		if (!key) continue;
+		result[key] = parseLiteralValue(prop.value);
+	}
+	return result;
+}
+
+function parseLiteralValue(node) {
+	switch (node.type) {
+		case "Literal":
+			return node.value;
+		case "ArrayExpression":
+			return node.elements.map(parseLiteralValue);
+		case "ObjectExpression": {
+			const obj = {};
+			for (const prop of node.properties) {
+				if (prop.type !== "Property") continue;
+				const key =
+					prop.key.type === "Identifier"
+						? prop.key.name
+						: prop.key.type === "Literal"
+							? String(prop.key.value)
+							: null;
+				if (key) obj[key] = parseLiteralValue(prop.value);
+			}
+			return obj;
+		}
+		default:
+			return undefined;
+	}
+}
+
+function getBlogTagRoutes() {
+	const dir = resolve("content/blog");
+	const files = readdirSync(dir).filter((f) => f.endsWith(".mdx"));
+	const tags = new Set();
+	for (const file of files) {
+		const raw = readFileSync(join(dir, file), "utf-8");
+		const meta = extractMdxMeta(raw);
+		if (meta?.tags) {
+			for (const tag of meta.tags) tags.add(tag);
+		}
+	}
+	return Array.from(tags).map((t) => `/blog/tag/${encodeURIComponent(t)}`);
+}
+
+function extractMdxMeta(raw) {
+	const match = raw.match(/export\s+const\s+meta\s*=\s*({[\s\S]*?});/);
+	if (!match) return null;
+	try {
+		return parseMetaObject(match[1]);
+	} catch {
+		return null;
+	}
+}
+
+function blogManifestPlugin() {
+	let written = false;
+	return {
+		name: "blog-manifest",
+		writeBundle() {
+			if (written) return;
+			written = true;
+			const contentDir = resolve("content/blog");
+			const files = readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
+			const posts = [];
+			for (const file of files) {
+				const slug = file.replace(".mdx", "");
+				const raw = readFileSync(join(contentDir, file), "utf-8");
+				const meta = extractMdxMeta(raw);
+				if (meta && !meta.draft) posts.push({ slug, ...meta });
+			}
+			posts.sort(
+				(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+			);
+			const dir = resolve("dist");
+			writeFileSync(
+				join(dir, "blog-manifest.json"),
+				`${JSON.stringify(posts, null, 2)}\n`,
+			);
+		},
+	};
+}
+
 export default defineConfig({
 	plugins: [
-		react(),
+		{
+			enforce: "pre",
+			...mdx({
+				remarkPlugins: [remarkGfm],
+				rehypePlugins: [
+					rehypeSlug,
+					[rehypeAutolinkHeadings, { behavior: "wrap" }],
+				],
+			}),
+		},
+		react({ include: /\.(jsx|js|mdx)$/ }),
+		blogManifestPlugin(),
 		sitemap({
 			hostname: "https://primeinnovators.org",
 			dynamicRoutes: [
@@ -14,6 +129,8 @@ export default defineConfig({
 				"/privacy",
 				"/terms",
 				"/coc",
+				"/blog",
+				...getBlogTagRoutes(),
 			],
 			generateRobotsTxt: true,
 			robots: [

@@ -1,0 +1,38 @@
+export const meta = {
+  title: "Edge Computing with Workers AI",
+  date: "2026-05-30",
+  description:
+    "Running inference on Cloudflare's edge network using Workers AI — latency benchmarks, use cases, and limitations.",
+  tags: ["edge-computing", "ai", "cloudflare"],
+  coverImage: "/og-image.png",
+  author: "Engineering Team",
+  draft: false,
+};
+
+## AI at the Edge
+
+Cloudflare's [Workers AI](https://developers.cloudflare.com/workers-ai/) lets you run inference models directly on the edge. No GPUs to manage, no cold starts for model loading.
+
+### Use Cases
+
+We're exploring three primary use cases:
+
+1. **Content moderation**: Scan user submissions in real-time
+2. **Language detection**: Route requests to the right locale
+3. **Smart caching**: Predict which content to pre-warm
+
+### Benchmarks
+
+Running Meta's Llama 3.2 1B model on Workers AI:
+
+| Metric | Value |
+|--------|-------|
+| Cold start | `<1ms` |
+| Inference time | 45ms |
+| First token | 120ms |
+
+### Limitations
+
+There are real constraints. Model sizes are limited to 2GB, and not all architectures are supported. For heavy workloads, we still fall back to dedicated inference endpoints. But for lightweight edge tasks, Workers AI is a game-changer.
+
+The edge is getting smarter every quarter.

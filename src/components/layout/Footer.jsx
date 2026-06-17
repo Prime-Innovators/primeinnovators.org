@@ -9,6 +9,7 @@ export default function Footer() {
 			{ label: "Roadmap", href: "/#roadmap" },
 		],
 		company: [
+			{ label: "Blog", href: "/blog" },
 			{ label: "Recruiters", href: "/#recruiters" },
 			{ label: "Waitlist", href: "/#waitlist" },
 			{ label: "About", href: "/about" },
