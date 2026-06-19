@@ -14,8 +14,8 @@ function generateFeed() {
 	try {
 		posts = JSON.parse(readFileSync(manifestPath, "utf-8"));
 	} catch {
-		console.error("No blog-manifest.json found. Run build first.");
-		process.exit(1);
+		console.log("No blog posts found. Skipping RSS feed generation.");
+		process.exit(0);
 	}
 
 	const items = posts

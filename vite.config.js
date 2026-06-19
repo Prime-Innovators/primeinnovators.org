@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import mdx from "@mdx-js/rollup";
 import react from "@vitejs/plugin-react";
@@ -56,6 +56,7 @@ function parseLiteralValue(node) {
 
 function getBlogTagRoutes() {
 	const dir = resolve("content/blog");
+	if (!existsSync(dir)) return [];
 	const files = readdirSync(dir).filter((f) => f.endsWith(".mdx"));
 	const tags = new Set();
 	for (const file of files) {
@@ -86,6 +87,7 @@ function blogManifestPlugin() {
 			if (written) return;
 			written = true;
 			const contentDir = resolve("content/blog");
+			if (!existsSync(contentDir)) return;
 			const files = readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
 			const posts = [];
 			for (const file of files) {
