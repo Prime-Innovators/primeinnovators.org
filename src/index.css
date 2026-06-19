@@ -3,9 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-	html {
-		scroll-behavior: smooth;
-	}
 
 	body {
 		@apply bg-background text-on-surface font-body antialiased;
@@ -108,5 +105,122 @@
 
 	.animate-glow-pulse {
 		animation: glow-pulse 6s ease-in-out infinite;
+	}
+
+	@keyframes reveal-up {
+		0% {
+			transform: translateY(20px);
+			opacity: 0;
+		}
+		100% {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+
+	@keyframes reveal-word {
+		0% {
+			transform: translateY(115%);
+		}
+		100% {
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes fade-in-scale {
+		0% {
+			opacity: 0;
+			transform: scale(0.96);
+		}
+		100% {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
+	.animate-reveal-up {
+		animation: reveal-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+		opacity: 0;
+	}
+
+	.animate-reveal-word {
+		animation: reveal-word 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+		transform: translateY(115%);
+	}
+
+	.animate-fade-in-scale {
+		animation: fade-in-scale 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+		opacity: 0;
+	}
+
+	.animation-delay-100 {
+		animation-delay: 100ms;
+	}
+	.animation-delay-200 {
+		animation-delay: 200ms;
+	}
+	.animation-delay-300 {
+		animation-delay: 300ms;
+	}
+	.animation-delay-400 {
+		animation-delay: 400ms;
+	}
+	.animation-delay-500 {
+		animation-delay: 500ms;
+	}
+	.animation-delay-700 {
+		animation-delay: 700ms;
+	}
+	.animation-delay-1000 {
+		animation-delay: 1000ms;
+	}
+
+	.reveal-on-scroll {
+		opacity: 0;
+		transform: translateY(20px);
+		transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+		will-change: transform, opacity;
+	}
+
+	.reveal-on-scroll.revealed {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	@keyframes reveal-3d-chain {
+		0% {
+			opacity: 0;
+			filter: blur(12px);
+			transform: translate3d(20px, 0, 180px) rotateY(-15deg);
+		}
+		100% {
+			opacity: 1;
+			filter: blur(0);
+			transform: translate3d(0, 0, 0) rotateY(0deg);
+		}
+	}
+
+	.animate-3d-chain {
+		animation: reveal-3d-chain 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+		opacity: 0;
+		transform-style: preserve-3d;
+	}
+
+	.perspective-1000 {
+		perspective: 1000px;
+	}
+
+	@keyframes draw-timeline-line {
+		0% {
+			transform: scaleY(0);
+		}
+		100% {
+			transform: scaleY(1);
+		}
+	}
+
+	.animate-draw-line {
+		animation: draw-timeline-line 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+		transform-origin: top;
 	}
 }

@@ -85,14 +85,16 @@ export default function BlogTagPage() {
 					<div className="mb-12">
 						<Link
 							to="/blog"
-							className="text-sm text-on-surface-variant hover:text-primary-fixed transition-colors mb-4 inline-block"
+							className="text-sm text-on-surface-variant hover:text-primary-fixed transition-colors mb-4 inline-block animate-fade-in-scale"
 						>
 							← Back to Blog
 						</Link>
-						<h1 className="text-display-lg text-gradient mb-4 capitalize">
-							{decodedTag}
-						</h1>
-						<p className="text-body-lg text-on-surface-variant">
+						<div className="overflow-hidden mb-4">
+							<h1 className="text-display-lg text-gradient animate-reveal-word capitalize leading-none">
+								{decodedTag}
+							</h1>
+						</div>
+						<p className="text-body-lg text-on-surface-variant animate-reveal-up animation-delay-200">
 							{taggedPosts.length === 1
 								? "1 post"
 								: `${taggedPosts.length} posts`}{" "}

@@ -7,6 +7,7 @@ import SectionHeader from "../components/ui/SectionHeader";
 import { milestones, problems, team, values } from "../constants/ecosystem";
 import { RoleIcon } from "../constants/icons";
 import { getPageSeo } from "../constants/seo";
+import { useScrollReveal } from "../utils/useScrollReveal";
 
 function AboutHero() {
 	return (
@@ -17,24 +18,61 @@ function AboutHero() {
 			</div>
 			<div className="section-container relative z-10 pt-28 pb-16 md:pt-32 md:pb-20 w-full">
 				<div className="max-w-4xl mx-auto text-center space-y-10">
-					<div className="inline-flex items-center gap-2 px-4 py-2 bg-surface-container-high/70 border border-white/10 rounded-full">
+					<div className="inline-flex items-center gap-2 px-4 py-2 bg-surface-container-high/70 border border-white/10 rounded-full animate-fade-in-scale">
 						<span className="text-label-sm text-on-surface-variant tracking-widest uppercase">
 							About Prime Innovators
 						</span>
 					</div>
 					<div className="space-y-6">
 						<h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-on-surface">
-							What if your code was{" "}
-							<span className="text-gradient">your credential</span>?
+							<span className="sr-only">
+								What if your code was your credential?
+							</span>
+							<span aria-hidden="true" className="block">
+								{"What if your code was".split(" ").map((word, i) => (
+									<span
+										key={word}
+										className="inline-block overflow-hidden mr-[0.2em]"
+									>
+										<span
+											className="inline-block animate-reveal-word"
+											style={{ animationDelay: `${i * 60 + 150}ms` }}
+										>
+											{word}
+										</span>
+									</span>
+								))}{" "}
+								{"your credential".split(" ").map((word, i) => (
+									<span
+										key={word}
+										className="inline-block overflow-hidden mr-[0.2em]"
+									>
+										<span
+											className="text-gradient inline-block animate-reveal-word"
+											style={{ animationDelay: `${(i + 5) * 60 + 150}ms` }}
+										>
+											{word}
+										</span>
+									</span>
+								))}
+								<span className="inline-block overflow-hidden mr-[0.2em]">
+									<span
+										className="inline-block animate-reveal-word"
+										style={{ animationDelay: `${7 * 60 + 150}ms` }}
+									>
+										?
+									</span>
+								</span>
+							</span>
 						</h1>
-						<p className="text-lg md:text-xl text-on-surface-variant max-w-3xl mx-auto leading-relaxed">
+						<p className="text-lg md:text-xl text-on-surface-variant max-w-3xl mx-auto leading-relaxed animate-reveal-up animation-delay-700">
 							Prime Innovators is building Pakistan’s open-source talent
 							ecosystem where students, developers, maintainers, sponsors, and
 							recruiters collaborate through verified work, structured learning,
 							and transparent project support.
 						</p>
 					</div>
-					<div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+					<div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-reveal-up animation-delay-1000">
 						<a
 							href="#waitlist"
 							className="btn-primary inline-flex items-center gap-2 group w-full sm:w-auto justify-center"
@@ -487,6 +525,7 @@ function EcosystemIncentivesSection() {
 }
 
 function HowItWorksSection() {
+	const [ref, isVisible] = useScrollReveal();
 	const steps = [
 		{
 			num: "1",
@@ -534,9 +573,20 @@ function HowItWorksSection() {
 					title="How It Works"
 					description="A structured, accountable path connecting education, open source, and the tech industry."
 				/>
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-6 relative">
+				<div
+					ref={ref}
+					className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-6 relative perspective-1000"
+				>
 					{steps.map((step, idx) => (
-						<div key={step.num} className="relative group space-y-4">
+						<div
+							key={step.num}
+							style={
+								isVisible ? { animationDelay: `${idx * 120}ms` } : undefined
+							}
+							className={`relative group space-y-4 ${
+								isVisible ? "animate-3d-chain" : "opacity-0"
+							}`}
+						>
 							<div className="flex lg:flex-col items-center gap-4 lg:gap-6">
 								<div className="w-12 h-12 rounded-full bg-surface-container-high border border-white/10 flex items-center justify-center font-mono font-bold text-primary-fixed group-hover:border-primary-fixed/50 transition-all duration-300 shadow-md">
 									{step.num}
@@ -562,6 +612,8 @@ function HowItWorksSection() {
 }
 
 function ValuesSection() {
+	const [ref, isVisible] = useScrollReveal();
+
 	return (
 		<section className="py-20 md:py-32 bg-surface-container-lowest border-y border-white/5 relative overflow-hidden">
 			<div className="section-container relative z-10 space-y-14">
@@ -572,24 +624,30 @@ function ValuesSection() {
 						className="text-center mx-auto"
 					/>
 				</div>
-				<div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-					{values.map((v) => (
-						<GlassCard
+				<div
+					ref={ref}
+					className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4"
+				>
+					{values.map((v, i) => (
+						<div
 							key={v.title}
-							className="p-6 hover:border-primary-fixed/50 transition-all duration-300 hover:-translate-y-1 group text-center"
+							style={isVisible ? { animationDelay: `${i * 100}ms` } : undefined}
+							className={`h-full ${isVisible ? "animate-reveal-up" : "opacity-0"}`}
 						>
-							<div className="space-y-3">
-								<div className="w-8 h-8 rounded-full bg-primary-fixed/10 mx-auto flex items-center justify-center">
-									<span className="w-2 h-2 rounded-full bg-primary-fixed" />
+							<GlassCard className="p-6 hover:border-primary-fixed/50 transition-all duration-300 hover:-translate-y-1 group text-center h-full">
+								<div className="space-y-3">
+									<div className="w-8 h-8 rounded-full bg-primary-fixed/10 mx-auto flex items-center justify-center">
+										<span className="w-2 h-2 rounded-full bg-primary-fixed" />
+									</div>
+									<h3 className="text-sm font-bold text-on-surface leading-tight">
+										{v.title}
+									</h3>
+									<p className="text-xs text-on-surface-variant/85 leading-relaxed">
+										{v.desc}
+									</p>
 								</div>
-								<h3 className="text-sm font-bold text-on-surface leading-tight">
-									{v.title}
-								</h3>
-								<p className="text-xs text-on-surface-variant/85 leading-relaxed">
-									{v.desc}
-								</p>
-							</div>
-						</GlassCard>
+							</GlassCard>
+						</div>
 					))}
 				</div>
 			</div>
@@ -598,6 +656,8 @@ function ValuesSection() {
 }
 
 function MilestonesSection() {
+	const [ref, isVisible] = useScrollReveal();
+
 	return (
 		<section className="py-20 bg-surface-container-lowest border-y border-white/5 relative overflow-hidden">
 			<div className="absolute inset-0 pointer-events-none">
@@ -612,27 +672,54 @@ function MilestonesSection() {
 							description="We are committed to building a sustainable, long-term foundation for Pakistan's open-source future."
 						/>
 					</div>
-					<div className="lg:col-span-7">
+					<div className="lg:col-span-7" ref={ref}>
 						<GlassCard className="p-8 md:p-10">
 							<div className="space-y-0">
 								{milestones.map((ms, i) => (
-									<div key={ms.period} className="flex gap-6 group">
+									<div
+										key={ms.period}
+										style={
+											isVisible ? { animationDelay: `${i * 250}ms` } : undefined
+										}
+										className={`flex gap-6 group ${
+											isVisible ? "animate-reveal-up" : "opacity-0"
+										}`}
+									>
 										<div className="flex flex-col items-center">
 											<div
-												className={`w-3 h-3 rounded-full border-2 transition-colors duration-300 ${i === 3 ? "border-primary-fixed bg-primary-fixed shadow-[0_0_10px_rgba(243,230,75,0.5)]" : "border-white/20"}`}
+												className={`w-3 h-3 rounded-full border-2 transition-colors duration-300 ${
+													i === 3
+														? "border-primary-fixed bg-primary-fixed shadow-[0_0_10px_rgba(243,230,75,0.5)]"
+														: "border-white/20"
+												}`}
 											/>
 											{i < milestones.length - 1 && (
-												<div className="w-px flex-1 bg-white/10 group-hover:bg-primary-fixed/20 transition-colors" />
+												<div
+													style={
+														isVisible
+															? { animationDelay: `${i * 250 + 100}ms` }
+															: undefined
+													}
+													className={`w-px flex-1 bg-white/10 group-hover:bg-primary-fixed/20 transition-all ${
+														isVisible ? "animate-draw-line" : "scale-y-0"
+													}`}
+												/>
 											)}
 										</div>
 										<div className="pb-8">
 											<span
-												className={`text-xs font-mono font-bold tracking-wider ${i === 3 ? "text-primary-fixed" : "text-on-surface-variant/50"}`}
+												className={`text-xs font-mono font-bold tracking-wider ${
+													i === 3
+														? "text-primary-fixed"
+														: "text-on-surface-variant/50"
+												}`}
 											>
 												{ms.period}
 											</span>
 											<p
-												className={`text-base font-bold mt-1 ${i === 3 ? "text-on-surface" : "text-on-surface/85"}`}
+												className={`text-base font-bold mt-1 ${
+													i === 3 ? "text-on-surface" : "text-on-surface/85"
+												}`}
 											>
 												{ms.label}
 											</p>

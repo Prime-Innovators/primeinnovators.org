@@ -1,6 +1,7 @@
 import { ecosystemRoles } from "../../constants/ecosystem";
 import { RoleIcon } from "../../constants/icons";
 import GlassCard from "../ui/GlassCard";
+import ScrollReveal from "../ui/ScrollReveal";
 import SectionHeader from "../ui/SectionHeader";
 
 export default function EcosystemRolesSection() {
@@ -19,28 +20,27 @@ export default function EcosystemRolesSection() {
 					description="Prime Innovators is not a product. It's a connected system where contributors, maintainers, sponsors, and recruiters each win through verified collaboration."
 				/>
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-					{ecosystemRoles.map((role) => (
-						<GlassCard
-							key={role.title}
-							className="p-7 hover:border-primary-fixed/50 transition-all duration-300 hover:-translate-y-1 group"
-						>
-							<div className="space-y-4">
-								<div className="w-11 h-11 rounded-xl bg-surface-container-high border border-white/10 flex items-center justify-center text-primary-fixed">
-									<RoleIcon name={role.icon} />
-								</div>
-								<div>
-									<p className="text-label-sm text-secondary-fixed uppercase tracking-widest font-bold">
-										{role.title}
+					{ecosystemRoles.map((role, i) => (
+						<ScrollReveal key={role.title} delay={i * 100}>
+							<GlassCard className="p-7 hover:border-primary-fixed/50 transition-all duration-300 hover:-translate-y-1 group">
+								<div className="space-y-4">
+									<div className="w-11 h-11 rounded-xl bg-surface-container-high border border-white/10 flex items-center justify-center text-primary-fixed">
+										<RoleIcon name={role.icon} />
+									</div>
+									<div>
+										<p className="text-label-sm text-secondary-fixed uppercase tracking-widest font-bold">
+											{role.title}
+										</p>
+										<h3 className="text-headline-sm font-bold text-on-surface mt-1">
+											{role.subtitle}
+										</h3>
+									</div>
+									<p className="text-on-surface-variant leading-relaxed text-sm">
+										{role.description}
 									</p>
-									<h3 className="text-headline-sm font-bold text-on-surface mt-1">
-										{role.subtitle}
-									</h3>
 								</div>
-								<p className="text-on-surface-variant leading-relaxed text-sm">
-									{role.description}
-								</p>
-							</div>
-						</GlassCard>
+							</GlassCard>
+						</ScrollReveal>
 					))}
 				</div>
 			</div>

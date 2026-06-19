@@ -1,3 +1,5 @@
+import ScrollReveal from "../ui/ScrollReveal";
+
 export default function RecruiterSection() {
 	const audienceCards = [
 		{
@@ -84,7 +86,7 @@ export default function RecruiterSection() {
 			<div className="absolute -bottom-48 -right-40 w-[640px] h-[640px] aurora-glow-yellow opacity-30 z-0" />
 
 			<div className="section-container relative z-10 space-y-16">
-				<div className="text-center space-y-6 max-w-2xl mx-auto">
+				<ScrollReveal className="text-center space-y-6 max-w-2xl mx-auto">
 					<span className="text-label-sm text-primary-fixed uppercase tracking-widest font-bold inline-block">
 						For Recruiters and Sponsors
 					</span>
@@ -95,71 +97,72 @@ export default function RecruiterSection() {
 						Cut through the noise. Discover verified talent and support projects
 						with trust, proof, and public accountability.
 					</p>
-				</div>
+				</ScrollReveal>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-					{audienceCards.map((card) => (
-						<div
-							key={card.title}
-							className="glass-card p-8 rounded-2xl border border-white/10 hover:border-primary-fixed/50 transition-all duration-300 hover:-translate-y-1 group relative overflow-hidden"
-						>
-							<div className="absolute inset-0 bg-gradient-to-br from-primary-fixed/[0.04] via-transparent to-secondary-fixed/[0.04] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-							<div className="relative z-10 space-y-6">
-								<div className="flex items-center gap-3">
-									<div className="w-11 h-11 rounded-xl bg-surface-container-high border border-white/10 flex items-center justify-center text-primary-fixed">
-										{card.icon}
+					{audienceCards.map((card, i) => (
+						<ScrollReveal key={card.title} delay={i * 100} className="h-full">
+							<div className="glass-card p-8 rounded-2xl border border-white/10 hover:border-primary-fixed/50 transition-all duration-300 hover:-translate-y-1 group relative overflow-hidden h-full">
+								<div className="absolute inset-0 bg-gradient-to-br from-primary-fixed/[0.04] via-transparent to-secondary-fixed/[0.04] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+								<div className="relative z-10 space-y-6">
+									<div className="flex items-center gap-3">
+										<div className="w-11 h-11 rounded-xl bg-surface-container-high border border-white/10 flex items-center justify-center text-primary-fixed">
+											{card.icon}
+										</div>
+										<div>
+											<p className="text-2xl font-bold text-on-surface">
+												{card.title}
+											</p>
+											<p className="text-label-sm text-secondary-fixed uppercase tracking-widest">
+												{card.tagline}
+											</p>
+										</div>
 									</div>
-									<div>
-										<p className="text-2xl font-bold text-on-surface">
-											{card.title}
-										</p>
-										<p className="text-label-sm text-secondary-fixed uppercase tracking-widest">
-											{card.tagline}
-										</p>
-									</div>
+
+									<p className="text-on-surface-variant leading-relaxed">
+										{card.description}
+									</p>
+
+									<ul className="space-y-3 text-sm text-on-surface-variant">
+										{card.highlights.map((item) => (
+											<li key={item} className="flex items-start gap-3">
+												<span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary-fixed flex-shrink-0" />
+												<span>{item}</span>
+											</li>
+										))}
+									</ul>
 								</div>
-
-								<p className="text-on-surface-variant leading-relaxed">
-									{card.description}
-								</p>
-
-								<ul className="space-y-3 text-sm text-on-surface-variant">
-									{card.highlights.map((item) => (
-										<li key={item} className="flex items-start gap-3">
-											<span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary-fixed flex-shrink-0" />
-											<span>{item}</span>
-										</li>
-									))}
-								</ul>
 							</div>
-						</div>
+						</ScrollReveal>
 					))}
 				</div>
 
-				<div className="glass-card p-8 md:p-12 rounded-2xl space-y-8 border border-white/10 group relative overflow-hidden">
-					<div className="absolute inset-0 bg-gradient-to-br from-primary-fixed/[0.03] via-transparent to-secondary-fixed/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-					<div className="relative z-10 space-y-8">
-						<h3 className="text-2xl font-bold text-on-surface">
-							How engagement works
-						</h3>
+				<ScrollReveal>
+					<div className="glass-card p-8 md:p-12 rounded-2xl space-y-8 border border-white/10 group relative overflow-hidden">
+						<div className="absolute inset-0 bg-gradient-to-br from-primary-fixed/[0.03] via-transparent to-secondary-fixed/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+						<div className="relative z-10 space-y-8">
+							<h3 className="text-2xl font-bold text-on-surface">
+								How engagement works
+							</h3>
 
-						<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-							{engagementSteps.map((item) => (
-								<div key={item.step} className="space-y-4">
-									<div className="w-10 h-10 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold text-lg">
-										{item.step}
+							<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+								{engagementSteps.map((item) => (
+									<div key={item.step} className="space-y-4">
+										<div className="w-10 h-10 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold text-lg">
+											{item.step}
+										</div>
+										<h4 className="font-bold text-on-surface">{item.title}</h4>
+										<p className="text-on-surface-variant text-sm leading-relaxed">
+											{item.description}
+										</p>
 									</div>
-									<h4 className="font-bold text-on-surface">{item.title}</h4>
-									<p className="text-on-surface-variant text-sm leading-relaxed">
-										{item.description}
-									</p>
-								</div>
-							))}
+								))}
+							</div>
 						</div>
 					</div>
-				</div>
+				</ScrollReveal>
 
-				<div className="text-center space-y-6">
+				<ScrollReveal className="text-center space-y-6">
 					<p className="text-on-surface-variant">
 						Ready to join Pakistan&apos;s verified talent ecosystem?
 					</p>
@@ -191,7 +194,7 @@ export default function RecruiterSection() {
 							Sponsor this project
 						</a>
 					</div>
-				</div>
+				</ScrollReveal>
 			</div>
 		</section>
 	);

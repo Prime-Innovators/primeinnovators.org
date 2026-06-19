@@ -1,3 +1,5 @@
+import ScrollReveal from "../ui/ScrollReveal";
+
 export default function CapabilitiesSection() {
 	const capabilities = [
 		{
@@ -149,7 +151,7 @@ export default function CapabilitiesSection() {
 
 	return (
 		<section className="py-20 md:py-32 section-container" id="pillars">
-			<div className="mb-16 space-y-6">
+			<ScrollReveal className="mb-16 space-y-6">
 				<div>
 					<span className="text-label-sm text-primary-fixed uppercase tracking-widest font-bold inline-block mb-4">
 						Ecosystem Pillars
@@ -163,43 +165,42 @@ export default function CapabilitiesSection() {
 					maintainers, and provides transparent signals for sponsors and
 					recruiters.
 				</p>
-			</div>
+			</ScrollReveal>
 
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-				{capabilities.map((capability) => (
-					<div
-						key={capability.title}
-						className="glass-card p-8 rounded-2xl border border-white/10 hover:border-primary-fixed/50 transition-all duration-300 hover:-translate-y-1 group relative overflow-hidden"
-					>
-						<div className="absolute inset-0 bg-gradient-to-br from-primary-fixed/[0.04] via-transparent to-secondary-fixed/[0.04] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-						<div className="relative z-10 space-y-4">
-							<div className="flex items-start justify-between">
-								<div className="w-12 h-12 rounded-xl bg-surface-container-high border border-white/10 flex items-center justify-center text-primary-fixed">
-									{capability.icon}
+				{capabilities.map((capability, i) => (
+					<ScrollReveal key={capability.title} delay={i * 100}>
+						<div className="glass-card p-8 rounded-2xl border border-white/10 hover:border-primary-fixed/50 transition-all duration-300 hover:-translate-y-1 group relative overflow-hidden h-full">
+							<div className="absolute inset-0 bg-gradient-to-br from-primary-fixed/[0.04] via-transparent to-secondary-fixed/[0.04] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+							<div className="relative z-10 space-y-4">
+								<div className="flex items-start justify-between">
+									<div className="w-12 h-12 rounded-xl bg-surface-container-high border border-white/10 flex items-center justify-center text-primary-fixed">
+										{capability.icon}
+									</div>
+									<span className="text-label-sm text-on-surface-variant font-bold opacity-60">
+										{capability.number}
+									</span>
 								</div>
-								<span className="text-label-sm text-on-surface-variant font-bold opacity-60">
-									{capability.number}
-								</span>
-							</div>
 
-							<h3 className="text-headline-sm font-bold text-on-surface">
-								{capability.title}
-							</h3>
+								<h3 className="text-headline-sm font-bold text-on-surface">
+									{capability.title}
+								</h3>
 
-							<p className="text-on-surface-variant leading-relaxed text-sm">
-								{capability.description}
-							</p>
-
-							<div className="pt-3 border-t border-white/10">
-								<span className="text-label-sm text-on-surface-variant uppercase tracking-widest">
-									Outcome
-								</span>
-								<p className="text-sm text-on-surface mt-2 font-semibold">
-									{capability.outcome}
+								<p className="text-on-surface-variant leading-relaxed text-sm">
+									{capability.description}
 								</p>
+
+								<div className="pt-3 border-t border-white/10">
+									<span className="text-label-sm text-on-surface-variant uppercase tracking-widest">
+										Outcome
+									</span>
+									<p className="text-sm text-on-surface mt-2 font-semibold">
+										{capability.outcome}
+									</p>
+								</div>
 							</div>
 						</div>
-					</div>
+					</ScrollReveal>
 				))}
 			</div>
 		</section>

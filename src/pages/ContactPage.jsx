@@ -110,17 +110,17 @@ export default function ContactPage() {
 
 			<header className="py-24 md:py-32 section-container">
 				<div className="max-w-3xl mx-auto text-center space-y-4">
-					<span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
+					<span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary animate-fade-in-scale">
 						{inquiry.badge}
 					</span>
-					<h1 className="text-3xl md:text-4xl font-bold text-on-surface">
+					<h1 className="text-3xl md:text-4xl font-bold text-on-surface animate-reveal-up animation-delay-200">
 						Get in touch
 					</h1>
-					<p className="text-lg text-on-surface-variant">
+					<p className="text-lg text-on-surface-variant animate-reveal-up animation-delay-300">
 						Have a question, idea, or want to partner with us? We'd love to hear
 						from you.
 					</p>
-					<p className="text-sm text-on-surface-variant/80 max-w-2xl mx-auto">
+					<p className="text-sm text-on-surface-variant/80 max-w-2xl mx-auto animate-reveal-up animation-delay-400">
 						{inquiry.helpText} If your email app does not open, write directly
 						to{" "}
 						<a href="mailto:hello@primeinnovators.org" className="underline">
