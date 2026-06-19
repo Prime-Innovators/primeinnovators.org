@@ -1,11 +1,20 @@
+import { useScrollReveal } from "../../utils/useScrollReveal";
+
 export default function SectionHeader({
 	label,
 	title,
 	description,
 	className = "",
 }) {
+	const [ref, isVisible] = useScrollReveal();
+
 	return (
-		<div className={`max-w-2xl space-y-4 ${className}`}>
+		<div
+			ref={ref}
+			className={`max-w-2xl space-y-4 reveal-on-scroll ${
+				isVisible ? "revealed" : ""
+			} ${className}`}
+		>
 			<span className="text-label-sm text-primary-fixed uppercase tracking-widest font-bold">
 				{label}
 			</span>

@@ -133,13 +133,13 @@ export default function FAQPage() {
 
 			<header className="py-24 md:py-32 section-container">
 				<div className="max-w-3xl mx-auto text-center space-y-4">
-					<span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
+					<span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary animate-fade-in-scale">
 						FAQ
 					</span>
-					<h1 className="text-3xl md:text-4xl font-bold text-on-surface">
+					<h1 className="text-3xl md:text-4xl font-bold text-on-surface animate-reveal-up animation-delay-200">
 						Frequently asked questions
 					</h1>
-					<p className="text-lg text-on-surface-variant">
+					<p className="text-lg text-on-surface-variant animate-reveal-up animation-delay-300">
 						Everything you need to know about the Prime Innovators ecosystem
 					</p>
 				</div>

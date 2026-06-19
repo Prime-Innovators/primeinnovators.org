@@ -140,14 +140,18 @@ export default function BlogIndexPage() {
 				<div className="section-container relative z-10">
 					<div className="mx-auto max-w-4xl">
 						<div className="mb-12">
-							<div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full mb-4">
+							<div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full mb-4 animate-fade-in-scale">
 								<span className="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse" />
 								<span className="text-label-sm text-on-surface-variant tracking-widest uppercase">
 									Articles & Insights
 								</span>
 							</div>
-							<h1 className="text-display-lg text-gradient mb-4">Blog</h1>
-							<p className="text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+							<div className="overflow-hidden mb-4">
+								<h1 className="text-display-lg text-gradient animate-reveal-word leading-none">
+									Blog
+								</h1>
+							</div>
+							<p className="text-body-lg text-on-surface-variant max-w-2xl leading-relaxed animate-reveal-up animation-delay-200">
 								Engineering deep dives, architecture decisions, and stories from
 								Pakistan&apos;s open-source ecosystem.
 							</p>

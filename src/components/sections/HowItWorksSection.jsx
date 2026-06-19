@@ -1,3 +1,5 @@
+import ScrollReveal from "../ui/ScrollReveal";
+
 export default function HowItWorksSection() {
 	const steps = [
 		{
@@ -37,7 +39,7 @@ export default function HowItWorksSection() {
 		>
 			<div className="section-container">
 				{/* Section Header */}
-				<div className="text-center mb-16 space-y-6">
+				<ScrollReveal className="text-center mb-16 space-y-6">
 					<span className="text-label-sm text-secondary-fixed uppercase tracking-widest font-bold inline-block">
 						System Flow
 					</span>
@@ -48,50 +50,49 @@ export default function HowItWorksSection() {
 						Each stage produces auditable proof — for contributors, maintainers,
 						sponsors, and recruiters.
 					</p>
-				</div>
+				</ScrollReveal>
 
 				{/* Steps Grid */}
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-					{steps.map((step) => (
-						<div
-							key={step.number}
-							className="glass-card p-8 rounded-2xl group border border-white/10 hover:border-primary-fixed/50 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
-						>
-							<div className="absolute inset-0 bg-gradient-to-br from-primary-fixed/[0.04] via-transparent to-secondary-fixed/[0.04] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-							<div className="relative z-10 space-y-6">
-								{/* Step Number */}
-								<div className="text-4xl font-bold text-primary-fixed opacity-60 group-hover:opacity-100 transition-opacity">
-									{step.number}
-								</div>
+					{steps.map((step, i) => (
+						<ScrollReveal key={step.number} delay={i * 100}>
+							<div className="glass-card p-8 rounded-2xl group border border-white/10 hover:border-primary-fixed/50 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden h-full">
+								<div className="absolute inset-0 bg-gradient-to-br from-primary-fixed/[0.04] via-transparent to-secondary-fixed/[0.04] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+								<div className="relative z-10 space-y-6">
+									{/* Step Number */}
+									<div className="text-4xl font-bold text-primary-fixed opacity-60 group-hover:opacity-100 transition-opacity">
+										{step.number}
+									</div>
 
-								{/* Title */}
-								<h3 className="text-headline-sm font-bold text-on-surface">
-									{step.title}
-								</h3>
+									{/* Title */}
+									<h3 className="text-headline-sm font-bold text-on-surface">
+										{step.title}
+									</h3>
 
-								{/* Description */}
-								<p className="text-on-surface-variant leading-relaxed">
-									{step.description}
-								</p>
+									{/* Description */}
+									<p className="text-on-surface-variant leading-relaxed">
+										{step.description}
+									</p>
 
-								{/* Keywords/Tags */}
-								<div className="pt-4 border-t border-white/12 space-y-3">
-									<span className="text-label-sm text-on-surface-variant uppercase tracking-widest">
-										Signals
-									</span>
-									<div className="flex flex-wrap gap-2">
-										{step.keywords.map((keyword) => (
-											<span
-												key={keyword}
-												className="px-3 py-1 rounded-full border border-white/10 bg-surface-container-high/60 text-xs text-on-surface-variant"
-											>
-												{keyword}
-											</span>
-										))}
+									{/* Keywords/Tags */}
+									<div className="pt-4 border-t border-white/12 space-y-3">
+										<span className="text-label-sm text-on-surface-variant uppercase tracking-widest">
+											Signals
+										</span>
+										<div className="flex flex-wrap gap-2">
+											{step.keywords.map((keyword) => (
+												<span
+													key={keyword}
+													className="px-3 py-1 rounded-full border border-white/10 bg-surface-container-high/60 text-xs text-on-surface-variant"
+												>
+													{keyword}
+												</span>
+											))}
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
+						</ScrollReveal>
 					))}
 				</div>
 			</div>

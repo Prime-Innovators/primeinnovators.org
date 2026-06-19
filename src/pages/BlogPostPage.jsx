@@ -115,7 +115,7 @@ export default function BlogPostPage() {
 							</Link>
 
 							{tags?.length > 0 && (
-								<div className="flex flex-wrap gap-2 mb-4">
+								<div className="flex flex-wrap gap-2 mb-4 animate-fade-in-scale">
 									{tags.map((tag) => (
 										<Link
 											key={tag}
@@ -128,9 +128,11 @@ export default function BlogPostPage() {
 								</div>
 							)}
 
-							<h1 className="text-display-lg text-gradient mb-4">{title}</h1>
+							<h1 className="text-display-lg text-gradient mb-4 animate-reveal-up animation-delay-200">
+								{title}
+							</h1>
 
-							<div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-on-surface-variant">
+							<div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-on-surface-variant animate-reveal-up animation-delay-300">
 								<span>{author}</span>
 								<span aria-hidden="true">·</span>
 								<time dateTime={publishedAt}>{formatDate(date)}</time>
