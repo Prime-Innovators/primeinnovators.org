@@ -70,19 +70,44 @@ export default function ContactPage() {
 		setStatus("loading");
 		setMessage("");
 
-		const lines = [
-			`Name: ${formData.name.trim()}`,
-			`Email: ${formData.email.trim()}`,
-			`Subject: ${formData.subject.trim() || inquiry.subject}`,
-			"",
-			formData.message.trim(),
-		].filter(Boolean);
+		try {
+			const response = await fetch("https://api.primeinnovators.org/contact", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					name: formData.name.trim(),
+					email: formData.email.trim(),
+					subject: formData.subject.trim() || inquiry.subject,
+					message: formData.message.trim(),
+					inquiry_type: inquiryType,
+				}),
+			});
 
-		const mailtoUrl = `mailto:hello@primeinnovators.org?subject=${encodeURIComponent(formData.subject.trim() || inquiry.subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+			const data = await response.json();
 
-		window.location.href = mailtoUrl;
-		setStatus("success");
-		setMessage("Opening your email app to hello@primeinnovators.org.");
+			if (response.ok) {
+				setStatus("success");
+				setMessage("Message sent! We'll get back to you within 24 hours.");
+				setFormData({ name: "", email: "", subject: "", message: "" });
+			} else {
+				setStatus("error");
+				setMessage(data.error || "Something went wrong. Please try again.");
+			}
+		} catch (_err) {
+			const lines = [
+				`Name: ${formData.name.trim()}`,
+				`Email: ${formData.email.trim()}`,
+				`Subject: ${formData.subject.trim() || inquiry.subject}`,
+				"",
+				formData.message.trim(),
+			].filter(Boolean);
+
+			const mailtoUrl = `mailto:hello@primeinnovators.org?subject=${encodeURIComponent(formData.subject.trim() || inquiry.subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+
+			window.location.href = mailtoUrl;
+			setStatus("success");
+			setMessage("Our server is unreachable. Opening your email app instead.");
+		}
 	};
 
 	return (
@@ -224,9 +249,7 @@ export default function ContactPage() {
 								disabled={status === "loading"}
 								className="w-full h-12 rounded-lg font-medium bg-primary text-on-primary hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
 							>
-								{status === "loading"
-									? "Preparing email..."
-									: "Open Email Draft"}
+								{status === "loading" ? "Sending..." : "Send Message"}
 							</button>
 
 							{message && (

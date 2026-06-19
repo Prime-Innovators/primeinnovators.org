@@ -1,5 +1,5 @@
 name = "primeinnovators-api"
-main = "backend/api/waitlist.js"
+main = "backend/api/index.js"
 compatibility_date = "2024-11-29"
 
 # Add route configuration

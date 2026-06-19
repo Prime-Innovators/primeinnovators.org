@@ -1,150 +1,108 @@
-export default {
-	async fetch(request, env) {
-		const url = new URL(request.url);
+import { sendEmail, welcomeEmail } from "./email.js";
 
-		if (!url.pathname.startsWith("/waitlist")) {
-			return new Response(
-				JSON.stringify({
-					success: false,
-					error: "Not found",
-				}),
-				{
-					status: 404,
-					headers: { "Content-Type": "application/json" },
-				},
-			);
-		}
+function validateEmail(email) {
+	return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 254;
+}
 
-		const corsHeaders = {
-			"Access-Control-Allow-Origin": "https://primeinnovators.org",
-			"Access-Control-Allow-Methods": "POST, OPTIONS",
-			"Access-Control-Allow-Headers": "Content-Type",
-			"Access-Control-Max-Age": "86400",
-		};
+export async function handleWaitlist(request, env) {
+	const body = await request.json().catch(() => null);
 
-		// Handle preflight requests
-		if (request.method === "OPTIONS") {
-			return new Response(null, {
-				status: 204,
-				headers: corsHeaders,
-			});
-		}
+	if (!body?.email) {
+		return Response.json(
+			{ success: false, error: "Email is required" },
+			{ status: 400 },
+		);
+	}
 
-		// Only allow POST requests
-		if (request.method !== "POST") {
-			return new Response(
-				JSON.stringify({
-					success: false,
-					error: "Method not allowed",
-				}),
-				{
-					status: 405,
-					headers: {
-						...corsHeaders,
-						"Content-Type": "application/json",
-					},
-				},
-			);
-		}
+	const email = body.email.trim().toLowerCase();
 
-		try {
-			const body = await request.json().catch(() => null);
+	if (!validateEmail(email)) {
+		return Response.json(
+			{ success: false, error: "Please enter a valid email address" },
+			{ status: 400 },
+		);
+	}
 
-			if (!body?.email) {
-				return new Response(
-					JSON.stringify({
-						success: false,
-						error: "Email is required",
-					}),
-					{
-						status: 400,
-						headers: { ...corsHeaders, "Content-Type": "application/json" },
-					},
-				);
-			}
+	const name = body.name?.trim() || null;
+	const role = body.role?.trim() || null;
+	const utmSource = body.utm_source?.trim() || null;
+	const utmMedium = body.utm_medium?.trim() || null;
+	const utmCampaign = body.utm_campaign?.trim() || null;
+	const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+	const userAgent = request.headers.get("User-Agent") || "unknown";
+	const referer = request.headers.get("Referer") || null;
+	const country = request.cf?.country || null;
 
-			const email = body.email.trim().toLowerCase();
-
-			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-			if (!emailRegex.test(email)) {
-				return new Response(
-					JSON.stringify({
-						success: false,
-						error: "Please enter a valid email address",
-					}),
-					{
-						status: 400,
-						headers: { ...corsHeaders, "Content-Type": "application/json" },
-					},
-				);
-			}
-
-			if (email.length > 254) {
-				return new Response(
-					JSON.stringify({
-						success: false,
-						error: "Email address is too long",
-					}),
-					{
-						status: 400,
-						headers: { ...corsHeaders, "Content-Type": "application/json" },
-					},
-				);
-			}
-
-			const ip = request.headers.get("CF-Connecting-IP") || "unknown";
-			const userAgent = request.headers.get("User-Agent") || "unknown";
-			const referer = request.headers.get("Referer") || null;
-			const country = request.cf?.country || null;
-
-			const result = await env.DB.prepare(
-				`INSERT INTO waitlist (email, ip_address, user_agent, referrer, country) 
-         VALUES (?, ?, ?, ?, ?)`,
+	try {
+		const result = await env.DB.prepare(
+			`INSERT INTO waitlist (email, name, role, utm_source, utm_medium, utm_campaign, ip_address, user_agent, referrer, country)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+		)
+			.bind(
+				email,
+				name,
+				role,
+				utmSource,
+				utmMedium,
+				utmCampaign,
+				ip,
+				userAgent,
+				referer,
+				country,
 			)
-				.bind(email, ip, userAgent, referer, country)
-				.run();
+			.run();
 
-			if (result.success) {
-				return new Response(
-					JSON.stringify({
-						success: true,
-						message:
-							"Successfully joined the waitlist! We'll notify you when we launch.",
-					}),
-					{
-						status: 200,
-						headers: { ...corsHeaders, "Content-Type": "application/json" },
-					},
-				);
-			} else {
-				throw new Error("Database insertion failed");
+		if (!result.success) {
+			throw new Error("Database insertion failed");
+		}
+
+		if (env.RESEND_API_KEY) {
+			const sent = await sendEmail(
+				env,
+				email,
+				"You're on the Prime Innovators waitlist",
+				welcomeEmail(name),
+			);
+			if (sent) {
+				await env.DB.prepare(
+					"UPDATE waitlist SET email_sent_at = CURRENT_TIMESTAMP WHERE email = ?",
+				)
+					.bind(email)
+					.run();
 			}
-		} catch (error) {
-			if (error.message?.includes("UNIQUE constraint failed")) {
-				return new Response(
-					JSON.stringify({
-						success: false,
-						error: "This email is already on our waitlist!",
-					}),
-					{
-						status: 409,
-						headers: { ...corsHeaders, "Content-Type": "application/json" },
-					},
-				);
-			}
+		}
 
-			console.error("Error processing waitlist submission:", error);
-
-			return new Response(
-				JSON.stringify({
-					success: false,
-					error: "Something went wrong. Please try again later.",
-				}),
-				{
-					status: 500,
-					headers: { ...corsHeaders, "Content-Type": "application/json" },
-				},
+		return Response.json({
+			success: true,
+			message:
+				"Successfully joined the waitlist! We'll notify you when we launch.",
+		});
+	} catch (error) {
+		if (error.message?.includes("UNIQUE constraint failed")) {
+			return Response.json(
+				{ success: false, error: "This email is already on our waitlist!" },
+				{ status: 409 },
 			);
 		}
-	},
-};
+		console.error("Waitlist error:", error);
+		return Response.json(
+			{
+				success: false,
+				error: "Something went wrong. Please try again later.",
+			},
+			{ status: 500 },
+		);
+	}
+}
+
+export async function handleCount(env) {
+	try {
+		const result = await env.DB.prepare(
+			"SELECT COUNT(*) as count FROM waitlist",
+		).first();
+		return Response.json({ count: result.count });
+	} catch (error) {
+		console.error("Count error:", error);
+		return Response.json({ count: 0 });
+	}
+}
