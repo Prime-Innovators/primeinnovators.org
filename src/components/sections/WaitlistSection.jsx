@@ -1,7 +1,62 @@
+import { useEffect, useRef, useState } from "react";
 import WaitlistForm from "../forms/WaitlistForm";
 import ScrollReveal from "../ui/ScrollReveal";
 
+function useWaitlistCount() {
+	const [count, setCount] = useState(null);
+	const fetched = useRef(false);
+
+	useEffect(() => {
+		if (fetched.current) return;
+		fetched.current = true;
+
+		fetch("https://api.primeinnovators.org/waitlist/count")
+			.then((r) => r.json())
+			.then((data) => {
+				if (typeof data.count === "number") setCount(data.count);
+			})
+			.catch(() => {});
+	}, []);
+
+	return count;
+}
+
+function AnimatedCount({ target }) {
+	const [display, setDisplay] = useState(0);
+	const started = useRef(false);
+
+	useEffect(() => {
+		if (started.current || target == null) return;
+		started.current = true;
+
+		const duration = 1200;
+		const start = performance.now();
+
+		function tick(now) {
+			const elapsed = now - start;
+			const progress = Math.min(elapsed / duration, 1);
+			const eased = 1 - (1 - progress) ** 3;
+			setDisplay(Math.round(eased * target));
+
+			if (progress < 1) requestAnimationFrame(tick);
+		}
+
+		requestAnimationFrame(tick);
+	}, [target]);
+
+	if (target == null)
+		return <span className="text-2xl font-bold text-primary-fixed">—</span>;
+
+	return (
+		<span className="text-2xl font-bold text-primary-fixed">
+			{display.toLocaleString()}+
+		</span>
+	);
+}
+
 export default function WaitlistSection() {
+	const count = useWaitlistCount();
+
 	return (
 		<section
 			className="relative py-20 md:py-32 bg-surface-container-lowest border-y border-white/5 overflow-hidden"
@@ -30,11 +85,9 @@ export default function WaitlistSection() {
 
 							<div className="grid grid-cols-2 md:grid-cols-3 gap-6 pt-8 border-t border-white/12">
 								<div className="space-y-2">
-									<p className="text-2xl font-bold text-primary-fixed">
-										Growing
-									</p>
+									<AnimatedCount target={count} />
 									<p className="text-label-sm text-on-surface-variant">
-										Contributor Base
+										Contributors on the waitlist
 									</p>
 								</div>
 								<div className="space-y-2">
