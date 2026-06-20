@@ -14,6 +14,10 @@ export default function Footer() {
 			{ label: "About", href: "/about" },
 			{ label: "FAQ", href: "/faq" },
 			{ label: "Contact", href: "/contact" },
+			{
+				label: "Source Code",
+				href: "https://github.com/Prime-Innovators/primeinnovators.org",
+			},
 		],
 		legal: [
 			{ label: "Privacy", href: "/privacy" },
@@ -109,25 +113,38 @@ export default function Footer() {
 					<div className="space-y-4">
 						<h4 className="font-bold text-on-surface">Company</h4>
 						<ul className="space-y-2">
-							{links.company.map((link) => (
-								<li key={link.label}>
-									{link.href.startsWith("mailto:") ? (
-										<a
-											href={link.href}
-											className="text-on-surface-variant hover:text-primary-fixed transition-colors text-sm"
-										>
-											{link.label}
-										</a>
-									) : (
-										<Link
-											to={link.href}
-											className="text-on-surface-variant hover:text-primary-fixed transition-colors text-sm"
-										>
-											{link.label}
-										</Link>
-									)}
-								</li>
-							))}
+							{links.company.map((link) => {
+								const isExternal =
+									link.href.startsWith("http") ||
+									link.href.startsWith("mailto:");
+								return (
+									<li key={link.label}>
+										{isExternal ? (
+											<a
+												href={link.href}
+												target={
+													link.href.startsWith("http") ? "_blank" : undefined
+												}
+												rel={
+													link.href.startsWith("http")
+														? "noopener noreferrer"
+														: undefined
+												}
+												className="text-on-surface-variant hover:text-primary-fixed transition-colors text-sm"
+											>
+												{link.label}
+											</a>
+										) : (
+											<Link
+												to={link.href}
+												className="text-on-surface-variant hover:text-primary-fixed transition-colors text-sm"
+											>
+												{link.label}
+											</Link>
+										)}
+									</li>
+								);
+							})}
 						</ul>
 					</div>
 
