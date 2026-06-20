@@ -5,6 +5,7 @@ import BlogPostPage from "../pages/BlogPostPage";
 import BlogTagPage from "../pages/BlogTagPage";
 import COCPage from "../pages/COCPage";
 import ContactPage from "../pages/ContactPage";
+import EcosystemPage from "../pages/EcosystemPage";
 import FAQPage from "../pages/FAQPage";
 import HomePage from "../pages/HomePage";
 import NotFoundPage from "../pages/NotFoundPage";
@@ -28,6 +29,7 @@ export const routes = [
 		children: [
 			{ index: true, Component: HomePage },
 			{ path: "about", Component: AboutPage },
+			{ path: "ecosystem", Component: EcosystemPage },
 			{ path: "faq", Component: FAQPage },
 			{ path: "contact", Component: ContactPage },
 			{ path: "privacy", Component: PrivacyPage },

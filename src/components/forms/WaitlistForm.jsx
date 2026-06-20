@@ -101,7 +101,7 @@ export default function WaitlistForm({ className = "" }) {
 						value={name}
 						onChange={(e) => setName(e.target.value)}
 						disabled={status === "loading"}
-						className="h-12 sm:h-14 flex-1 rounded-lg bg-surface-container-high/80 px-4 text-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary-fixed focus:ring-offset-2 focus:ring-offset-surface disabled:opacity-50 md:text-base border border-white/10"
+						className="h-14 flex-1 rounded-lg bg-surface-container-high/80 px-4 text-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary-fixed focus:ring-offset-2 focus:ring-offset-surface disabled:opacity-50 md:text-base border border-white/10"
 						placeholder="Your name"
 						aria-label="Your name"
 					/>
@@ -111,7 +111,7 @@ export default function WaitlistForm({ className = "" }) {
 						value={role}
 						onChange={(e) => setRole(e.target.value)}
 						disabled={status === "loading"}
-						className="h-12 sm:h-14 rounded-lg bg-surface-container-high/80 px-4 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-fixed focus:ring-offset-2 focus:ring-offset-surface disabled:opacity-50 md:text-base border border-white/10 appearance-none cursor-pointer min-w-[180px]"
+						className="h-14 rounded-lg bg-surface-container-high/80 px-4 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-fixed focus:ring-offset-2 focus:ring-offset-surface disabled:opacity-50 md:text-base border border-white/10 appearance-none cursor-pointer min-w-[180px]"
 						aria-label="Your role"
 					>
 						{roles.map((r) => (
@@ -122,7 +122,7 @@ export default function WaitlistForm({ className = "" }) {
 					</select>
 				</div>
 
-				<div className="flex h-12 sm:h-14 w-full items-stretch rounded-lg overflow-hidden border border-white/10">
+				<div className="flex flex-col sm:flex-row w-full rounded-lg overflow-hidden border border-white/10">
 					<input
 						id="email"
 						name="email"
@@ -131,7 +131,7 @@ export default function WaitlistForm({ className = "" }) {
 						onChange={(e) => setEmail(e.target.value)}
 						disabled={status === "loading"}
 						required
-						className="h-full flex-1 bg-surface-container-high/80 px-4 text-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary-fixed focus:ring-inset disabled:opacity-50 md:text-base border-r border-white/10"
+						className="h-14 flex-1 bg-surface-container-high/80 px-4 text-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary-fixed focus:ring-inset disabled:opacity-50 md:text-base border-b sm:border-b-0 sm:border-r border-white/10"
 						placeholder="Enter your email"
 						aria-label="Email address"
 						aria-describedby={message ? "form-message" : undefined}
@@ -139,7 +139,7 @@ export default function WaitlistForm({ className = "" }) {
 					<button
 						type="submit"
 						disabled={status === "loading"}
-						className="flex min-w-[100px] items-center justify-center bg-primary-fixed px-5 text-sm font-bold text-on-primary-fixed transition-all hover:opacity-90 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary-fixed focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 md:min-w-[120px] md:px-6 md:text-base shadow-[0_10px_25px_rgba(243,230,75,0.2)]"
+						className="flex h-14 items-center justify-center bg-primary-fixed px-5 text-sm font-bold text-on-primary-fixed transition-all hover:opacity-90 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary-fixed focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 sm:min-w-[120px] md:px-6 md:text-base shadow-[0_10px_25px_rgba(243,230,75,0.2)]"
 					>
 						{status === "loading" ? "Joining..." : "Join Waitlist"}
 					</button>

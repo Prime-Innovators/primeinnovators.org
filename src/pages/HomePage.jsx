@@ -1,10 +1,7 @@
 import { Helmet } from "react-helmet-async";
-import CapabilitiesSection from "../components/sections/CapabilitiesSection";
-import EcosystemRoadmap from "../components/sections/EcosystemRoadmap";
+import { Link } from "react-router-dom";
 import EcosystemRolesSection from "../components/sections/EcosystemRolesSection";
 import HeroSection from "../components/sections/HeroSection";
-import HowItWorksSection from "../components/sections/HowItWorksSection";
-import RecruiterSection from "../components/sections/RecruiterSection";
 import WaitlistSection from "../components/sections/WaitlistSection";
 import { OrganizationSchema, WebSiteSchema } from "../components/seo/JsonLd";
 import { getPageSeo } from "../constants/seo";
@@ -36,10 +33,38 @@ export default function HomePage() {
 
 			<HeroSection />
 			<EcosystemRolesSection />
-			<HowItWorksSection />
-			<CapabilitiesSection />
-			<EcosystemRoadmap />
-			<RecruiterSection />
+			<section className="py-16 md:py-20 section-container text-center border-y border-white/5 bg-surface-container-lowest">
+				<div className="max-w-2xl mx-auto space-y-6">
+					<h2 className="text-2xl md:text-3xl font-bold text-on-surface">
+						Want the full picture?
+					</h2>
+					<p className="text-on-surface-variant leading-relaxed">
+						Dive deep into how the ecosystem works — the proof gap it solves,
+						every role with its own CTA, the six systems that power it, and the
+						build roadmap.
+					</p>
+					<Link
+						to="/ecosystem"
+						className="btn-secondary inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-label-md transition-all hover:-translate-y-0.5"
+					>
+						<span>Explore the Ecosystem</span>
+						<svg
+							aria-hidden="true"
+							className="w-4 h-4"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={2}
+								d="M13 7l5 5m0 0l-5 5m5-5H6"
+							/>
+						</svg>
+					</Link>
+				</div>
+			</section>
 			<WaitlistSection />
 		</>
 	);

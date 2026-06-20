@@ -1,58 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useWaitlistCount } from "../../hooks/useWaitlistCount";
 import WaitlistForm from "../forms/WaitlistForm";
+import AnimatedCount from "../ui/AnimatedCount";
 import ScrollReveal from "../ui/ScrollReveal";
-
-function useWaitlistCount() {
-	const [count, setCount] = useState(null);
-	const fetched = useRef(false);
-
-	useEffect(() => {
-		if (fetched.current) return;
-		fetched.current = true;
-
-		fetch("https://api.primeinnovators.org/waitlist/count")
-			.then((r) => r.json())
-			.then((data) => {
-				if (typeof data.count === "number") setCount(data.count);
-			})
-			.catch(() => {});
-	}, []);
-
-	return count;
-}
-
-function AnimatedCount({ target }) {
-	const [display, setDisplay] = useState(0);
-	const started = useRef(false);
-
-	useEffect(() => {
-		if (started.current || target == null) return;
-		started.current = true;
-
-		const duration = 1200;
-		const start = performance.now();
-
-		function tick(now) {
-			const elapsed = now - start;
-			const progress = Math.min(elapsed / duration, 1);
-			const eased = 1 - (1 - progress) ** 3;
-			setDisplay(Math.round(eased * target));
-
-			if (progress < 1) requestAnimationFrame(tick);
-		}
-
-		requestAnimationFrame(tick);
-	}, [target]);
-
-	if (target == null)
-		return <span className="text-2xl font-bold text-primary-fixed">—</span>;
-
-	return (
-		<span className="text-2xl font-bold text-primary-fixed">
-			{display.toLocaleString()}+
-		</span>
-	);
-}
 
 export default function WaitlistSection() {
 	const count = useWaitlistCount();
@@ -62,7 +11,7 @@ export default function WaitlistSection() {
 			className="relative py-20 md:py-32 bg-surface-container-lowest border-y border-white/5 overflow-hidden"
 			id="waitlist"
 		>
-			<div className="absolute -top-48 -left-40 w-[600px] h-[600px] aurora-glow-yellow opacity-20" />
+			<div className="absolute -top-48 -left-40 w-[600px] h-[600px] aurora-glow-yellow opacity-20 pointer-events-none" />
 			<div className="section-container relative z-10">
 				<ScrollReveal>
 					<div className="glass-card p-8 md:p-16 rounded-2xl space-y-8 text-center max-w-2xl mx-auto border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:border-primary-fixed/30 group relative overflow-hidden">
