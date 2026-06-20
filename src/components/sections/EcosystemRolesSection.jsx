@@ -1,8 +1,16 @@
+import { Link } from "react-router-dom";
 import { ecosystemRoles } from "../../constants/ecosystem";
 import { RoleIcon } from "../../constants/icons";
 import GlassCard from "../ui/GlassCard";
 import ScrollReveal from "../ui/ScrollReveal";
 import SectionHeader from "../ui/SectionHeader";
+
+const roleCtas = {
+	Contributors: { label: "Learn More", to: "/ecosystem#roles" },
+	Maintainers: { label: "Learn More", to: "/ecosystem#roles" },
+	Sponsors: { label: "Learn More", to: "/ecosystem#roles" },
+	Recruiters: { label: "Learn More", to: "/ecosystem#roles" },
+};
 
 export default function EcosystemRolesSection() {
 	return (
@@ -20,28 +28,55 @@ export default function EcosystemRolesSection() {
 					description="Prime Innovators is not a product. It's a connected system where contributors, maintainers, sponsors, and recruiters each win through verified collaboration."
 				/>
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-					{ecosystemRoles.map((role, i) => (
-						<ScrollReveal key={role.title} delay={i * 100}>
-							<GlassCard className="p-7 hover:border-primary-fixed/50 transition-all duration-300 hover:-translate-y-1 group">
-								<div className="space-y-4">
-									<div className="w-11 h-11 rounded-xl bg-surface-container-high border border-white/10 flex items-center justify-center text-primary-fixed">
-										<RoleIcon name={role.icon} />
-									</div>
-									<div>
-										<p className="text-label-sm text-secondary-fixed uppercase tracking-widest font-bold">
-											{role.title}
+					{ecosystemRoles.map((role, i) => {
+						const key = role.title.replace("For ", "");
+						const cta = roleCtas[key];
+
+						return (
+							<ScrollReveal key={role.title} delay={i * 100}>
+								<GlassCard className="p-7 hover:border-primary-fixed/50 transition-all duration-300 hover:-translate-y-1 group h-full flex flex-col">
+									<div className="space-y-4 flex-1">
+										<div className="w-11 h-11 rounded-xl bg-surface-container-high border border-white/10 flex items-center justify-center text-primary-fixed">
+											<RoleIcon name={role.icon} />
+										</div>
+										<div>
+											<p className="text-label-sm text-secondary-fixed uppercase tracking-widest font-bold">
+												{role.title}
+											</p>
+											<h3 className="text-headline-sm font-bold text-on-surface mt-1">
+												{role.subtitle}
+											</h3>
+										</div>
+										<p className="text-on-surface-variant leading-relaxed text-sm">
+											{role.description}
 										</p>
-										<h3 className="text-headline-sm font-bold text-on-surface mt-1">
-											{role.subtitle}
-										</h3>
 									</div>
-									<p className="text-on-surface-variant leading-relaxed text-sm">
-										{role.description}
-									</p>
-								</div>
-							</GlassCard>
-						</ScrollReveal>
-					))}
+									{cta && (
+										<Link
+											to={cta.to}
+											className="mt-5 text-xs font-bold text-primary-fixed hover:text-primary-fixed/80 transition-colors inline-flex items-center gap-1.5"
+										>
+											<span>{cta.label}</span>
+											<svg
+												aria-hidden="true"
+												className="w-3 h-3"
+												fill="none"
+												stroke="currentColor"
+												viewBox="0 0 24 24"
+											>
+												<path
+													strokeLinecap="round"
+													strokeLinejoin="round"
+													strokeWidth={2}
+													d="M9 5l7 7-7 7"
+												/>
+											</svg>
+										</Link>
+									)}
+								</GlassCard>
+							</ScrollReveal>
+						);
+					})}
 				</div>
 			</div>
 		</section>

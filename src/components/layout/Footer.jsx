@@ -3,18 +3,17 @@ import { Link } from "react-router-dom";
 export default function Footer() {
 	const links = {
 		product: [
-			{ label: "Ecosystem", href: "/#ecosystem" },
-			{ label: "How it Works", href: "/#how-it-works" },
-			{ label: "Pillars", href: "/#pillars" },
-			{ label: "Roadmap", href: "/#roadmap" },
+			{ label: "Ecosystem", href: "/ecosystem" },
+			{ label: "How it Works", href: "/ecosystem#how-it-works" },
+			{ label: "Pillars", href: "/ecosystem#pillars" },
+			{ label: "Roadmap", href: "/ecosystem#roadmap" },
 		],
 		company: [
 			{ label: "Blog", href: "/blog" },
-			{ label: "Recruiters", href: "/#recruiters" },
 			{ label: "Waitlist", href: "/#waitlist" },
 			{ label: "About", href: "/about" },
 			{ label: "FAQ", href: "/faq" },
-			{ label: "Contact", href: "mailto:hello@primeinnovators.org" },
+			{ label: "Contact", href: "/contact" },
 		],
 		legal: [
 			{ label: "Privacy", href: "/privacy" },

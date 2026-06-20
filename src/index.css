@@ -3,19 +3,26 @@
 @tailwind utilities;
 
 @layer base {
+	html {
+		scroll-behavior: smooth;
+	}
+
+	section[id] {
+		scroll-margin-top: 96px;
+	}
 
 	body {
 		@apply bg-background text-on-surface font-body antialiased;
 		text-rendering: optimizeLegibility;
 		background-image:
 			radial-gradient(
-				900px 420px at 15% -10%,
-				rgba(243, 230, 75, 0.18),
+				800px 380px at 15% -10%,
+				rgba(243, 230, 75, 0.12),
 				transparent 60%
 			),
 			radial-gradient(
-				800px 420px at 90% 10%,
-				rgba(86, 253, 194, 0.12),
+				700px 380px at 90% 10%,
+				rgba(66, 253, 194, 0.08),
 				transparent 55%
 			),
 			linear-gradient(180deg, rgba(17, 19, 25, 1) 0%, rgba(11, 14, 19, 1) 100%);

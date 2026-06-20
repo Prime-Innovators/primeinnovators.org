@@ -34,6 +34,16 @@ export const seo = {
 		ogDescription:
 			"A national ecosystem where contributors earn trust through verified work, maintainers attract motivated teams, sponsors fund with transparency, and recruiters discover proven talent.",
 	},
+	"/ecosystem": {
+		...defaults,
+		title:
+			"Ecosystem | Prime Innovators — Pakistan's Open-Source Talent Network",
+		description:
+			"Explore the Prime Innovators ecosystem: a connected system where contributors earn verified reputation, maintainers attract talent, sponsors fund transparently, and recruiters discover proven skills through real open-source work.",
+		ogTitle: "The Prime Innovators Ecosystem — Verified Open-Source Talent",
+		ogDescription:
+			"A connected system for verified open-source talent. Contributors, maintainers, sponsors, and recruiters each win through transparent, collaborative, verifiable work.",
+	},
 	"/about": {
 		...defaults,
 		title: "About Prime Innovators | Pakistan's Open-Source Talent Ecosystem",

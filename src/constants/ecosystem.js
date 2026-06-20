@@ -104,10 +104,10 @@ export const team = [
 		linkedin: "https://www.linkedin.com/in/warisha-shaukat-82470b354",
 	},
 	{
-		name: "Ahmed Habib",
+		name: "Ahmad Habib",
 		role: "AI/ML Engineer",
 		bio: "Building intelligent systems to verify contributions and score impact. Making AI-powered reputation verification possible.",
-		// image: "/images/team/ahmed-habib.webp",
+		image: "/images/team/ahmad-habib.webp",
 		linkedin: "https://www.linkedin.com/in/ahmad-habib-044579347",
 	},
 	{
@@ -128,7 +128,7 @@ export const team = [
 		name: "Muhammad Hasaam",
 		role: "Frontend Engineer",
 		bio: "Crafting intuitive, user-friendly interfaces for contributors, maintainers, and sponsors. Making complex data accessible and actionable.",
-		// image: "/images/team/muhammad-hasaam.webp",
+		image: "/images/team/muhammad-hasaam.webp",
 		linkedin: "https://www.linkedin.com/in/m-hasaam",
 	},
 	{

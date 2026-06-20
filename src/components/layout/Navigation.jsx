@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 
 const links = [
 	{ label: "Home", to: "/" },
+	{ label: "Ecosystem", to: "/ecosystem" },
 	{ label: "About", to: "/about" },
 	{ label: "Blog", to: "/blog" },
 	{ label: "Contact", to: "/contact" },
@@ -93,7 +94,7 @@ export default function Navigation() {
 					<div className="flex items-center gap-2 md:gap-3 shrink-0">
 						<Link
 							to="/#waitlist"
-							className="btn-primary group hidden sm:inline-flex items-center gap-2 px-5 py-3 text-label-md"
+							className="group hidden sm:inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-3 text-label-md font-bold text-on-surface-variant transition-all hover:border-white/25 hover:bg-white/10 hover:text-on-surface"
 						>
 							<span>Join the Waitlist</span>
 							<svg
