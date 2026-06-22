@@ -1,38 +1,14 @@
-const metaModules = import.meta.glob("/content/blog/*.mdx", {
-	eager: true,
-	import: "meta",
-});
+import { buildPostObject, filterAndSort } from "./blog-common";
 
-function parseDate(date) {
-	const d = new Date(date);
-	return Number.isNaN(d.getTime()) ? new Date() : d;
-}
-
-function estimateReadingTime(description) {
-	const words = (description || "").split(/\s+/).length;
-	if (words > 30) return "3 min read";
-	return "2 min read";
-}
+const modules = import.meta.glob("/content/blog/*.mdx", { eager: true });
 
 export function getAllPosts() {
-	return Object.entries(metaModules)
-		.map(([path, meta]) => {
+	return filterAndSort(
+		Object.entries(modules).map(([path, mod]) => {
 			const slug = path.split("/").pop().replace(".mdx", "");
-			return {
-				slug,
-				title: meta.title || slug,
-				date: meta.date || "",
-				publishedAt: meta.date ? new Date(meta.date).toISOString() : "",
-				description: meta.description || "",
-				coverImage: meta.coverImage || "",
-				tags: meta.tags || [],
-				author: meta.author || "Prime Innovators",
-				draft: meta.draft || false,
-				readingTime: estimateReadingTime(meta.description),
-			};
-		})
-		.filter((p) => !p.draft)
-		.sort((a, b) => parseDate(b.date).getTime() - parseDate(a.date).getTime());
+			return buildPostObject(slug, mod.meta || {}, mod.readingTime);
+		}),
+	);
 }
 
 export function getPostBySlug(slug) {
