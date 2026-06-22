@@ -3,6 +3,7 @@ import { join, resolve } from "node:path";
 import mdx from "@mdx-js/rollup";
 import react from "@vitejs/plugin-react";
 import * as acorn from "acorn";
+import readingTime from "reading-time";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
@@ -79,6 +80,35 @@ function extractMdxMeta(raw) {
 	}
 }
 
+function mdxReadingTimePlugin() {
+	return {
+		name: "mdx-reading-time",
+		transform(_code, id) {
+			if (!id.endsWith(".mdx")) return;
+			const raw = readFileSync(id, "utf-8");
+			// Strip MDX syntax to get readable text for word counting.
+			// There's no standard library for this — MDX is a mix of markdown,
+			// JSX, and JS imports/exports, so we handle each layer directly:
+			const content = raw
+				// 1. Remove `import X from "..."` statements (JS syntax, not content)
+				.replace(/^import\s+.*?;?\s*$/gm, "")
+				// 2. Remove `export const meta = { title, date, ... }` frontmatter block
+				.replace(/export\s+const\s+meta\s*=\s*\{[\s\S]*?\};/, "")
+				// 3. Remove JSX component tags like <Callout>, <FAQAccordion />, etc.
+				.replace(/<[^>]+>/g, "")
+				.trim();
+			const { minutes } = readingTime(content);
+			const displayed = Math.max(1, Math.round(minutes));
+			const readingTimeStr =
+				displayed === 1 ? "1 min read" : `${displayed} min read`;
+			return {
+				code: `${_code}\nexport const readingTime = ${JSON.stringify(readingTimeStr)};`,
+				map: null,
+			};
+		},
+	};
+}
+
 function blogManifestPlugin() {
 	let written = false;
 	return {
@@ -120,6 +150,7 @@ export default defineConfig({
 				],
 			}),
 		},
+		mdxReadingTimePlugin(),
 		react({ include: /\.(jsx|js|mdx)$/ }),
 		blogManifestPlugin(),
 		sitemap({
