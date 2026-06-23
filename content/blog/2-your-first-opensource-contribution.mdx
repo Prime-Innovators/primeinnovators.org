@@ -1,5 +1,6 @@
 import FAQAccordion from "../../src/components/blog/FAQAccordion";
 import Callout from "../../src/components/blog/Callout";
+import TableOfContents from "../../src/components/TableOfContents";
 
 export const meta = {
   title: "Your First Open Source Contribution: Guide for Students",
@@ -19,32 +20,26 @@ export const meta = {
 
 # Your First Open Source Contribution: Guide for Students
 
-Most students who haven't contributed to open source yet aren't lazy. They're stuck at the same wall.
+<TableOfContents />
 
-You open GitHub. You find a popular repository. You look at the codebase. It's massive, unfamiliar, and everyone contributing seems to already know exactly what they're doing. So you close the tab and tell yourself you'll do it when you're "ready."
+You open GitHub. You find a popular repository. You look at the codebase. It's massive, there are hundreds of open issues, and everyone contributing seems to already know exactly what they're doing. So you close the tab and tell yourself you'll do it when you're "ready."
 
-The problem is that "ready" never arrives on its own. And while you're waiting, the students who pushed through that exact same wall are quietly building the kind of public track record that gets them shortlisted.
+Here's the thing: that feeling doesn't go away on its own. The students who eventually push through it aren't more skilled than you. They just stopped waiting for permission and started somewhere small.
 
-This guide is for both kinds of stuck: the student who has never touched open source at all, and the student who knows what GitHub is but finds the whole contribution process genuinely intimidating. We'll go from zero to your first merged PR.
+This guide is for both kinds of stuck: the student who has never touched open source at all, and the student who knows what GitHub is but finds the actual contribution process genuinely confusing. We'll go from zero to your first merged PR.
 
-## Why Open Source Contributions Matter More Than You Think
+## Why Open Source Contributions Matter
 
-Before 'how', we look for the 'why', because if you don't buy into the reason, you won't push through the friction.
+Before 'how', we look for the 'why', because if this feels optional to you, you're less likely to push through the friction.
 
-When a recruiter looks at your profile and sees a merged pull request in a real repository, something specific happens in their head. They know:
+When a recruiter sees a merged pull request on your profile, it tends to tell them something a certificate or personal project often can't: that you understood a codebase you didn't write, that someone else reviewed your code and approved it, and that your change is now live in a real project used by other people.
+That kind of externally reviewed, publicly visible work can carry more weight than self-reported skills, particularly at the early-career stage when most candidates have similar-looking CVs. It doesn't guarantee anything, and not every recruiter weighs it the same way, but it is one of the few signals that is genuinely hard to fake.
 
-- Someone else reviewed your code and approved it
-- You understood a codebase you didn't write
-- You communicated through comments, commits, and a PR description
-- Your change is now live, in production, used by real people
+For students who are still building their profile, open source is also one of the few paths that doesn't require anyone to give you a job first.
 
-That is a fundamentally different signal than a certificate or a personal project you built alone. It is **externally verified proof**, and it is one of the hardest things to fake on a CV.
-
-<Callout type="info" title="The Verification Difference">
-  A personal project proves you can build. A merged open source contribution proves you can build in someone else's codebase, follow their standards, and get your work approved by a stranger. Recruiters know this distinction.
+<Callout type="info" title="What a Merged PR Actually Shows">
+  A personal project proves you can build. A merged open source contribution proves you can build in someone else's codebase, follow their standards, and get your work approved by a stranger. Many recruiters and hiring managers recognize this distinction.
 </Callout>
-
-For students in Pakistan specifically, where formal internship pipelines can be hard to access early on, open source is one of the most powerful ways to build a credible public record without waiting for someone to give you a chance first.
 
 ## The Mental Block You Need to Drop First
 
@@ -52,9 +47,9 @@ The biggest reason students don't contribute isn't technical. It's this belief:
 
 > *"I'm not good enough yet. I'll break something. They'll think I'm stupid."*
 
-Here is what actually happens in active open source communities: maintainers are happy when someone shows up with a genuine attempt to help. They review your PR, give you feedback, ask for changes, and help you get it merged. It is one of the most educational feedback loops available to a student developer that is free.
+What tends to actually happen in active open source communities is different. Maintainers of beginner-friendly projects are generally used to first-time contributors. They review your pull request, leave comments, ask for changes if needed, and help you get it across the line. The worst realistic outcome is that your PR gets closed with feedback explaining why.
 
-You will not "break" a production codebase by submitting a pull request. PRs go through review before anything is merged. The worst case is that your PR gets closed with feedback. That feedback is still valuable.
+That feedback is still useful. And PRs go through review before anything is merged, so you are not going to break a production codebase by submitting one.
 
 <Callout type="success" title="The Real Worst Case">
   Your PR gets closed. You learn exactly what to do differently. You try again. This is not failure, instead this is the process working exactly as intended.
@@ -126,7 +121,7 @@ You've forked repos before. You know what a pull request is. But you've never ac
 
 This section is for you.
 
-### The Issue Comment Step Most People Skip
+### Comment on the issue first
 
 Before you write any code, comment on the issue you want to work on.
 
@@ -134,11 +129,11 @@ Say something like:
 
 > *"Hi, I'd like to work on this. I'm planning to [brief description of your approach]. Is this still open and does my approach sound right?"*
 
-This does three things: it claims the issue so no one duplicates your work, it signals to the maintainer that you're thoughtful, and it often gets you guidance before you've written anything. Most beginners skip this and either duplicate someone else's work or go in the wrong direction entirely.
+This does three things: it claims the issue so no one duplicates your work, it signals that you're thoughtful before you code, and it often gets you guidance before you've written anything. Most beginners skip this and either duplicate someone else's work or go in the wrong direction.
 
 ### Working order: Fork, Clone, Branch
 
-Never work directly on main. Always:
+Never work directly on main. standard workflow is:
 
 1. Fork the repo to your own GitHub account
 2. Clone your fork locally
@@ -147,55 +142,48 @@ Never work directly on main. Always:
 5. Push to your fork
 6. Open a PR from your fork's branch to the original repo's main
 
-This is the standard workflow. Deviating from it is one of the most common reasons first PRs get closed immediately.
+Skipping any of these steps, particularly working on main directly, is one of the most common reasons first PRs get closed immediately.
 
 ### Write a PR Description That Respects the Reviewer's Time
 
-A good PR description answers three questions:
+A clear PR description answers three questions:
 
 - **What did you change?** (specific, not vague)
 - **Why did you change it?** (link the issue)
 - **How can they test or verify it?** (screenshots, steps, or explanation)
 
-Most first-time contributors write one sentence and submit. That makes the reviewer's job harder, which makes them less likely to prioritize your PR. A three-paragraph description that's clear and specific gets reviewed faster than a one-liner.
+Most first-time contributors write one sentence and hit submit. A clear, specific description that shows you've thought through the change tends to get reviewed faster than a vague one-liner.
 
 ## What to Do After Your First Contribution
 
 One merged PR is a start, not a finish. Here's how to build on it:
 
-**Stay in the same repository for your next contribution.** You already understand the codebase, the maintainer knows you're reliable, and your second contribution will be dramatically faster than your first.
+**Stay in the same repository for your next contribution.** You already understand the codebase, the maintainer knows you follow the process, and your second contribution will be significantly faster than your first.
 
 **Look for slightly harder issues.** Once you've done documentation or a small bug fix, find an issue that requires you to actually modify or add code. The growth happens at the edge of your comfort zone, not inside it.
 
-**Document what you learned.** A short writeup (even just a GitHub Gist or a LinkedIn post) about what you contributed and what you learned turns one PR into a visible story about your growth. Recruiters notice this kind of thing.
+**Document what you learned.** A short writeup (even just a GitHub Gist or a LinkedIn post) about what you contributed and what you learned turns one PR into a visible story about your growth. It is also useful context for anyone reviewing your profile later.
 
 **Start treating your GitHub as a professional artifact.** Consistent commit activity, clear READMEs, and a growing contribution history compound over time. A profile that shows six months of regular activity tells a very different story than one that shows a burst of activity right before you applied.
 
 
-## How Prime Innovators Changes This For Students
+## Where Prime Innovators Fits In
 
-The open source path described above works, but it has friction points that are harder to navigate without support: finding quality projects, getting feedback from experienced maintainers, and making sure your contributions are recognized in a way that recruiters can actually evaluate.
+Getting started with open source is often harder than it sounds. Students usually struggle with finding suitable projects, understanding contribution workflows, and knowing whether they're moving in the right direction.
 
-This is the specific gap **Prime Innovators** is building to close.
+Prime Innovators helps reduce that friction by connecting students with real open-source projects and experienced contributors. Instead of contributing in isolation, students can gain practical experience, receive feedback, and build a visible record of their work over time.
 
-The platform curates open-source projects with proper governance, onboarding artifacts, and roadmaps, so you're not blindly searching GitHub hoping to find something beginner-friendly. Maintainers submit projects specifically to attract student contributors, which means you're entering a codebase where your presence is expected and your contribution is valued.
-
-More importantly, every contribution you make is tracked, AI-scored for complexity and impact, and reflected in a verifiable profile that recruiters can filter by directly. Your merged PRs don't just sit on GitHub, they become part of a reputation graph that speaks for you in applications without you having to explain anything.
-
-If you're a student trying to build proof through open source, Prime Innovators is building the infrastructure to make that path clearer, faster, and more credible.
-
+For students trying to strengthen their portfolio through open source, Prime Innovators provides a more structured path to getting started and staying consistent.
 
 ## Conclusion
 
-Your first open source contribution is not going to be perfect. The code might need changes. The PR might take a week to get reviewed. You might pick the wrong issue your first time and have to start over.
+Your first contribution probably will not be perfect. The code might need changes. The review might take a few days. You might pick the wrong issue the first time.
 
-None of that matters as much as the fact that you pushed through the wall instead of waiting to be "ready."
+None of that is a reason to wait.
 
-Every senior developer you admire had a first pull request. Most of them were unremarkable. What made the difference was that they submitted it anyway, responded to the feedback, and kept going.
+Every experienced developer you look up to had a first pull request. Most of them were small and unremarkable. What made the difference was not the size of the contribution. It was that they responded to the feedback and kept going.
 
-Your first contribution is not the destination. It's the proof to yourself, and to every recruiter who looks at your profile that you're the kind of person who ships.
-
-Start this week. Pick a repo. Comment on an issue. The wall is smaller than it looks.
+Start this week. Find a repo. Comment on an issue. The wall is smaller than it looks from the outside, and getting through it is what separates people who talk about contributing from people who actually do.
 
 ## FAQs
 
@@ -227,7 +215,7 @@ Start this week. Pick a repo. Comment on an issue. The wall is smaller than it l
     },
     {
       q: "How does Prime Innovators help with open source contributions?",
-      a: "Prime Innovators curates projects specifically structured for student contributors, with onboarding artifacts, roadmaps, and active maintainers. Your contributions are AI-scored and tracked in a verifiable profile, so the work you do compounds into a reputation recruiters can evaluate directly.",
+      a: "Prime Innovators helps students discover real open-source projects, learn contribution workflows, and build a visible track record of work. Instead of contributing in isolation, students can work alongside experienced contributors, receive feedback, and gradually build proof of skills through meaningful contributions.",
     },
   ]}
 />
