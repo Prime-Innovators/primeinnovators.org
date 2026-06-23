@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import { ArticleSchema } from "../components/seo/JsonLd";
+import TableOfContents from "../components/TableOfContents";
 import { SITE_URL } from "../constants/seo";
 import { getAllPosts, getPostBySlug } from "../utils/blog";
 
@@ -97,93 +98,101 @@ export default function BlogPostPage() {
 				tags={tags}
 			/>
 
-			<section className="relative overflow-hidden pt-36 pb-24 md:pt-44 md:pb-32">
+			<section className="relative pt-36 pb-24 md:pt-44 md:pb-32">
 				{/* Aurora Glows for premium aesthetics */}
-				<div className="absolute inset-0 pointer-events-none">
+				<div className="absolute inset-0 pointer-events-none overflow-hidden">
 					<div className="absolute -top-48 -right-48 w-[600px] h-[600px] aurora-glow-yellow opacity-10 animate-float-slow" />
 					<div className="absolute top-1/3 -left-48 w-[600px] h-[600px] aurora-glow-teal opacity-5 animate-float-slower" />
 				</div>
 
 				<div className="section-container relative z-10">
-					<article className="mx-auto max-w-3xl">
-						<header className="mb-12">
-							<Link
-								to="/blog"
-								className="text-sm text-on-surface-variant hover:text-primary-fixed transition-colors mb-6 inline-block"
-							>
-								← Back to Blog
-							</Link>
+					<div className="mx-auto max-w-5xl flex flex-col lg:flex-row gap-12 items-start">
+						<article className="flex-1 w-full max-w-3xl mx-auto lg:mx-0">
+							<header className="mb-12">
+								<Link
+									to="/blog"
+									className="text-sm text-on-surface-variant hover:text-primary-fixed transition-colors mb-6 inline-block"
+								>
+									← Back to Blog
+								</Link>
 
-							{tags?.length > 0 && (
-								<div className="flex flex-wrap gap-2 mb-4 animate-fade-in-scale">
-									{tags.map((tag) => (
-										<Link
-											key={tag}
-											to={`/blog?tag=${encodeURIComponent(tag)}`}
-											className="rounded-full bg-primary-fixed/10 px-3 py-0.5 text-xs text-primary-fixed hover:bg-primary-fixed/20 transition-colors"
-										>
-											{tag}
-										</Link>
-									))}
+								{tags?.length > 0 && (
+									<div className="flex flex-wrap gap-2 mb-4 animate-fade-in-scale">
+										{tags.map((tag) => (
+											<Link
+												key={tag}
+												to={`/blog?tag=${encodeURIComponent(tag)}`}
+												className="rounded-full bg-primary-fixed/10 px-3 py-0.5 text-xs text-primary-fixed hover:bg-primary-fixed/20 transition-colors"
+											>
+												{tag}
+											</Link>
+										))}
+									</div>
+								)}
+
+								<h1 className="text-display-lg text-gradient mb-4 animate-reveal-up animation-delay-200">
+									{title}
+								</h1>
+
+								<div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-on-surface-variant animate-reveal-up animation-delay-300">
+									<span>{author}</span>
+									<span aria-hidden="true">·</span>
+									<time dateTime={publishedAt}>{formatDate(date)}</time>
+									{readingTime && (
+										<>
+											<span aria-hidden="true">·</span>
+											<span>{readingTime}</span>
+										</>
+									)}
 								</div>
-							)}
+							</header>
 
-							<h1 className="text-display-lg text-gradient mb-4 animate-reveal-up animation-delay-200">
-								{title}
-							</h1>
+							<TableOfContents className="block lg:hidden mb-12" />
 
-							<div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-on-surface-variant animate-reveal-up animation-delay-300">
-								<span>{author}</span>
-								<span aria-hidden="true">·</span>
-								<time dateTime={publishedAt}>{formatDate(date)}</time>
-								{readingTime && (
-									<>
-										<span aria-hidden="true">·</span>
-										<span>{readingTime}</span>
-									</>
-								)}
+							<div className="prose prose-invert prose-headings:font-headline prose-headings:text-on-surface prose-p:text-on-surface-variant prose-a:text-primary-fixed prose-a:no-underline hover:prose-a:underline prose-strong:text-on-surface prose-code:text-secondary-fixed prose-code:bg-surface-container prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-pre:bg-surface-container prose-pre:border prose-pre:border-surface-stroke prose-blockquote:border-l-primary-fixed prose-blockquote:text-on-surface-variant prose-li:text-on-surface-variant prose-th:text-on-surface prose-td:text-on-surface-variant max-w-none">
+								{Component ? <Component /> : null}
 							</div>
-						</header>
 
-						<div className="prose prose-invert prose-headings:font-headline prose-headings:text-on-surface prose-p:text-on-surface-variant prose-a:text-primary-fixed prose-a:no-underline hover:prose-a:underline prose-strong:text-on-surface prose-code:text-secondary-fixed prose-code:bg-surface-container prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-pre:bg-surface-container prose-pre:border prose-pre:border-surface-stroke prose-blockquote:border-l-primary-fixed prose-blockquote:text-on-surface-variant prose-li:text-on-surface-variant prose-th:text-on-surface prose-td:text-on-surface-variant max-w-none">
-							{Component ? <Component /> : null}
-						</div>
+							<nav className="mt-16 border-t border-surface-stroke pt-8">
+								<div className="flex flex-col sm:flex-row justify-between gap-4">
+									{prevPost ? (
+										<Link
+											to={`/blog/${prevPost.slug}`}
+											className="group text-left"
+										>
+											<span className="text-label-sm text-on-surface-variant">
+												← Previous
+											</span>
+											<p className="text-body-md text-on-surface group-hover:text-primary-fixed transition-colors mt-1">
+												{prevPost.title}
+											</p>
+										</Link>
+									) : (
+										<div />
+									)}
+									{nextPost ? (
+										<Link
+											to={`/blog/${nextPost.slug}`}
+											className="group text-right"
+										>
+											<span className="text-label-sm text-on-surface-variant">
+												Next →
+											</span>
+											<p className="text-body-md text-on-surface group-hover:text-primary-fixed transition-colors mt-1">
+												{nextPost.title}
+											</p>
+										</Link>
+									) : (
+										<div />
+									)}
+								</div>
+							</nav>
+						</article>
 
-						<nav className="mt-16 border-t border-surface-stroke pt-8">
-							<div className="flex flex-col sm:flex-row justify-between gap-4">
-								{prevPost ? (
-									<Link
-										to={`/blog/${prevPost.slug}`}
-										className="group text-left"
-									>
-										<span className="text-label-sm text-on-surface-variant">
-											← Previous
-										</span>
-										<p className="text-body-md text-on-surface group-hover:text-primary-fixed transition-colors mt-1">
-											{prevPost.title}
-										</p>
-									</Link>
-								) : (
-									<div />
-								)}
-								{nextPost ? (
-									<Link
-										to={`/blog/${nextPost.slug}`}
-										className="group text-right"
-									>
-										<span className="text-label-sm text-on-surface-variant">
-											Next →
-										</span>
-										<p className="text-body-md text-on-surface group-hover:text-primary-fixed transition-colors mt-1">
-											{nextPost.title}
-										</p>
-									</Link>
-								) : (
-									<div />
-								)}
-							</div>
-						</nav>
-					</article>
+						<aside className="hidden lg:block w-64 sticky top-32 shrink-0">
+							<TableOfContents />
+						</aside>
+					</div>
 				</div>
 			</section>
 		</>
