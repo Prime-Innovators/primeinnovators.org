@@ -45,7 +45,7 @@ export default function Navigation() {
 			: pathname === to || pathname.startsWith(`${to}/`);
 
 	const linkClass = (active) =>
-		`rounded-full px-4 py-2 text-label-md transition-all duration-300 ${
+		`rounded-full px-4 py-2 text-label-md transition-all duration-300 whitespace-nowrap ${
 			active
 				? "bg-white/10 text-primary-fixed shadow-[inset_0_0_0_1px_rgba(243,230,75,0.18)]"
 				: "text-on-surface-variant hover:bg-white/5 hover:text-on-surface"
@@ -60,7 +60,7 @@ export default function Navigation() {
 						: "bg-surface/60 backdrop-blur-xl"
 				}`}
 			>
-				<div className="flex h-16 items-center justify-between gap-3 md:h-16">
+				<div className="flex h-16 items-center justify-between gap-2 md:gap-1.5 md:h-16 overflow-hidden">
 					<Link to="/" className="flex items-center gap-3 group shrink-0">
 						<img
 							src="/favicon-32x32.png"
@@ -79,7 +79,7 @@ export default function Navigation() {
 						</div>
 					</Link>
 
-					<div className="hidden md:flex items-center gap-2 rounded-full border border-white/10 bg-black/10 px-2 py-1">
+					<div className="hidden md:flex items-center gap-2 md:gap-1 rounded-full border border-white/10 bg-black/10 px-2 md:px-1.5 py-1 md:py-0.5 text-sm md:text-xs flex-shrink min-w-0 overflow-hidden">
 						{links.map((link) => (
 							<Link
 								key={link.label}
@@ -91,7 +91,7 @@ export default function Navigation() {
 						))}
 					</div>
 
-					<div className="flex items-center gap-2 md:gap-3 shrink-0">
+					<div className="flex items-center gap-2 md:gap-3 shrink-0 min-w-0">
 						<a
 							href="https://github.com/Prime-Innovators/primeinnovators.org"
 							target="_blank"
